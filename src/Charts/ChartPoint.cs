@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using DocumentFormat.OpenXml.Packaging;
 using C = DocumentFormat.OpenXml.Drawing.Charts;
@@ -9,7 +9,7 @@ internal sealed class ChartPoint : IChartPoint
 {
     private readonly C.NumericValue cNumericValue;
     private readonly ChartPart? chartPart;
-    private readonly string? worksheetName; 
+    private readonly string? worksheetName;
     private readonly string? address;
 
     /// <summary>

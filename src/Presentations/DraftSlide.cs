@@ -352,11 +352,11 @@ public sealed class DraftSlide
             var (x, y, width, height) = GetChartDimensions(shapeBuilder, chartBuilder);
 
             slide.Shapes.AddPieChart(
-                x, 
-                y, 
-                width, 
-                height, 
-                categoryValues, 
+                x,
+                y,
+                width,
+                height,
+                categoryValues,
                 chartBuilder.SeriesName,
                 chartBuilder.ChartName);
         });
@@ -490,7 +490,7 @@ public sealed class DraftSlide
             action(slide, presentation);
         }
     }
-    
+
     private static Dictionary<string, double> BuildCategoryValues(DraftPieChart chartBuilder)
     {
         var categoryValues = new Dictionary<string, double>();

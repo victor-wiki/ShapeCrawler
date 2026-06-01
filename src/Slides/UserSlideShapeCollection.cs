@@ -20,7 +20,7 @@ using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Slides;
 
-internal sealed class UserSlideShapeCollection : IUserSlideShapeCollection
+public sealed class UserSlideShapeCollection : IUserSlideShapeCollection
 {
     private readonly ShapeCollection shapes;
     private readonly PictureShapeCollection pictureShapes;

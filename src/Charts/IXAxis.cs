@@ -36,7 +36,7 @@ public interface IXAxis
     string? Title { get; set; }
 }
 
-internal class XAxis(ChartPart chartPart) : IXAxis
+public class XAxis(ChartPart chartPart) : IXAxis
 {
     public double[] Values
     {

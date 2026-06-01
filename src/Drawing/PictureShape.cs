@@ -9,7 +9,7 @@ using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Drawing;
 
-internal class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(new Position(pPicture),
+public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(new Position(pPicture),
     new ShapeSize(pPicture), new ShapeId(pPicture), pPicture)
 {
     public override decimal X
@@ -54,7 +54,7 @@ internal class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(
 
     public override void CopyTo(P.ShapeTree pShapeTree) => picture.CopyTo(pShapeTree);
 
-    internal override void Render(SKCanvas canvas)
+    public override void Render(SKCanvas canvas)
     {
         if (picture.Image == null)
         {

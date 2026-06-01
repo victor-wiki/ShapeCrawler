@@ -1,8 +1,8 @@
-﻿namespace ShapeCrawler.Units;
+namespace ShapeCrawler.Units;
 
-internal readonly ref struct Emus(long emus)
+public readonly ref struct Emus(long emus)
 {
-    internal decimal AsPoints() => emus / 12700m;
+    public decimal AsPoints() => emus / 12700m;
 
-    internal decimal AsPixels() => emus / 9525m;
+    public decimal AsPixels() => emus / 9525m;
 }

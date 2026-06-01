@@ -9,7 +9,7 @@ using C = DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace ShapeCrawler.Charts;
 
-internal sealed class Categories(ChartPart chartPart) : IReadOnlyList<ICategory>
+public sealed class Categories(ChartPart chartPart) : IReadOnlyList<ICategory>
 {
     public int Count => this.CategoryList().Count;
 

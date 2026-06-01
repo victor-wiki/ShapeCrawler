@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 #pragma warning disable IDE0130
 namespace ShapeCrawler;
@@ -14,7 +14,7 @@ public interface ITableStyle
     public string Name { get; }
 }
 
-internal class TableStyle(string name) : ITableStyle
+public class TableStyle(string name) : ITableStyle
 {
     public string Name { get; } = name;
 

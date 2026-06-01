@@ -36,7 +36,8 @@ internal sealed class BubbleChart
         var xValues = new XValues();
         var xNumberLiteral = new NumberLiteral
         {
-            FormatCode = new FormatCode("General"), PointCount = new PointCount { Val = pointsCount }
+            FormatCode = new FormatCode("General"),
+            PointCount = new PointCount { Val = pointsCount }
         };
         uint index = 0;
         foreach (var point in pointValues)
@@ -54,7 +55,8 @@ internal sealed class BubbleChart
         var yValues = new YValues();
         var yNumberLiteral = new NumberLiteral
         {
-            FormatCode = new FormatCode("General"), PointCount = new PointCount { Val = pointsCount }
+            FormatCode = new FormatCode("General"),
+            PointCount = new PointCount { Val = pointsCount }
         };
         index = 0;
         foreach (var point in pointValues)
@@ -72,7 +74,8 @@ internal sealed class BubbleChart
         var bubbleSize = new BubbleSize();
         var sizeNumberLiteral = new NumberLiteral
         {
-            FormatCode = new FormatCode("General"), PointCount = new PointCount { Val = pointsCount }
+            FormatCode = new FormatCode("General"),
+            PointCount = new PointCount { Val = pointsCount }
         };
         index = 0;
         foreach (var point in pointValues)

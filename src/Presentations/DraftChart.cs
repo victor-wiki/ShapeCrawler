@@ -75,7 +75,7 @@ public sealed class DraftChart
         {
             throw new SCException($"{nameof(categories)} cannot be null.");
         }
-        
+
         foreach (var category in categories)
         {
             this.CategoryNames.Add([category]);

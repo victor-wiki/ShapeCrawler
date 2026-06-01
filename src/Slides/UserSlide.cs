@@ -14,7 +14,7 @@ using A = DocumentFormat.OpenXml.Drawing;
 namespace ShapeCrawler.Slides;
 
 /// <inheritdoc/>
-internal abstract class UserSlide(ILayoutSlide layoutSlide, UserSlideShapeCollection shapes, SlidePart slidePart) : IUserSlide
+public abstract class UserSlide(ILayoutSlide layoutSlide, UserSlideShapeCollection shapes, SlidePart slidePart) : IUserSlide
 {
     public ILayoutSlide LayoutSlide => layoutSlide;
 
@@ -239,7 +239,7 @@ internal abstract class UserSlide(ILayoutSlide layoutSlide, UserSlideShapeCollec
 
         presPart.Presentation!.Save();
     }
-    
+
     /// <summary>
     ///     Gets the underlying <see cref="SlidePart"/>.
     /// </summary>

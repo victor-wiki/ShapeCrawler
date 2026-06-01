@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using DocumentFormat.OpenXml;
 using ShapeCrawler.Shapes;
 using ShapeCrawler.Units;
@@ -6,7 +6,7 @@ using A = DocumentFormat.OpenXml.Drawing;
 
 namespace ShapeCrawler.Positions;
 
-internal sealed class Position(OpenXmlElement pShapeTreeElement)
+public sealed class Position(OpenXmlElement pShapeTreeElement)
 {
     internal decimal X
     {

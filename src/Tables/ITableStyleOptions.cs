@@ -38,7 +38,7 @@ public interface ITableStyleOptions
     public bool HasBandedColumns { get; set; }
 }
 
-internal sealed class TableStyleOptions(TableProperties tableProperties)
+public sealed class TableStyleOptions(TableProperties tableProperties)
     : ITableStyleOptions
 {
     public bool HasHeaderRow

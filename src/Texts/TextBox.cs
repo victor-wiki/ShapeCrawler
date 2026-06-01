@@ -8,7 +8,7 @@ using A = DocumentFormat.OpenXml.Drawing;
 // ReSharper disable PossibleMultipleEnumeration
 namespace ShapeCrawler.Texts;
 
-internal abstract class TextBox : ITextBox
+public abstract class TextBox : ITextBox
 {
     private readonly TextBoxMargins margins;
     private readonly OpenXmlElement textBody;

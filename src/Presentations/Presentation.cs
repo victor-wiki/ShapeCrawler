@@ -72,7 +72,7 @@ public sealed class Presentation : IPresentation
                 ? new PresentationProperties(
                     this.PresDocument.CoreFilePropertiesPart.OpenXmlPackage.PackageProperties,
                     this.PresDocument.ExtendedFilePropertiesPart)
-                : new PresentationProperties(new DefaultPackageProperties(),  this.PresDocument.ExtendedFilePropertiesPart);
+                : new PresentationProperties(new DefaultPackageProperties(), this.PresDocument.ExtendedFilePropertiesPart);
     }
 
     /// <summary>

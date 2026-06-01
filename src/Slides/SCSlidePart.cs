@@ -81,7 +81,10 @@ internal readonly ref struct SCSlidePart(SlidePart slidePart)
 
         // Create the diagram graphic
         var graphic = new A.Graphic();
-        var graphicData = new A.GraphicData { Uri = SmartArtDiagramUri, InnerXml = "<dgm:relIds xmlns:dgm=\"http://schemas.openxmlformats.org/drawingml/2006/diagram\" " +
+        var graphicData = new A.GraphicData
+        {
+            Uri = SmartArtDiagramUri,
+            InnerXml = "<dgm:relIds xmlns:dgm=\"http://schemas.openxmlformats.org/drawingml/2006/diagram\" " +
                                                                                    "xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" " +
                                                                                    $"r:dm=\"{diagramPartIds.DataId}\" " +
                                                                                    $"r:lo=\"{diagramPartIds.LayoutId}\" " +

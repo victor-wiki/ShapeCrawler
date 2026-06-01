@@ -1,4 +1,4 @@
-﻿namespace ShapeCrawler.SlideMasters;
+namespace ShapeCrawler.SlideMasters;
 
 /// <summary>
 ///     Represents solid fill properties.
@@ -9,4 +9,5 @@ public interface ISolidFill
     ///     Gets the color in hexadecimal format.
     /// </summary>
     string Color { get; }
+    double Alpha { get; }
 }

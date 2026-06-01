@@ -8,7 +8,7 @@ using C = DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace ShapeCrawler.Charts;
 
-internal sealed class Chart : IBarChart, IColumnChart, ILineChart, IPieChart, IScatterChart, IBubbleChart,
+public sealed class Chart : IBarChart, IColumnChart, ILineChart, IPieChart, IScatterChart, IBubbleChart,
     IAreaChart
 {
     private readonly SeriesCollection seriesCollection;
@@ -19,7 +19,7 @@ internal sealed class Chart : IBarChart, IColumnChart, ILineChart, IPieChart, IS
     private readonly XAxis? xAxis;
     private readonly Lazy<ChartTitle> chartTitle;
 
-    internal Chart(
+    public Chart(
         SeriesCollection seriesCollection,
         SlideShapeOutline outline,
         ShapeFill fill,
@@ -36,7 +36,7 @@ internal sealed class Chart : IBarChart, IColumnChart, ILineChart, IPieChart, IS
         this.chartTitle = new Lazy<ChartTitle>(() => new ChartTitle(chartPart, this.Type, this.SeriesCollection, new ChartTitleAlignment(chartPart)));
     }
 
-    internal Chart(
+    public Chart(
         SeriesCollection seriesCollection,
         SlideShapeOutline outline,
         ShapeFill fill,

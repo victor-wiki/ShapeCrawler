@@ -5,7 +5,7 @@ using A = DocumentFormat.OpenXml.Drawing;
 
 namespace ShapeCrawler.Shapes;
 
-internal sealed class ShapeSize(OpenXmlElement pShapeTreeElement)
+public sealed class ShapeSize(OpenXmlElement pShapeTreeElement)
 {
     internal decimal Width
     {

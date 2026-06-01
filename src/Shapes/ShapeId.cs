@@ -1,10 +1,10 @@
-﻿using System.Linq;
+using System.Linq;
 using DocumentFormat.OpenXml;
 using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Shapes;
 
-internal sealed class ShapeId(OpenXmlElement pShapeTreeElement)
+public sealed class ShapeId(OpenXmlElement pShapeTreeElement)
 {
     internal int Value()
     {

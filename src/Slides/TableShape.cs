@@ -11,11 +11,11 @@ using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Slides;
 
-internal sealed class TableShape : DrawingShape
+public sealed class TableShape : DrawingShape
 {
     private const string MediumStyle2Accent1Guid = "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}";
 
-    internal TableShape(Position position, ShapeSize shapeSize, ShapeId shapeId, P.GraphicFrame pGraphicFrame)
+    public TableShape(Position position, ShapeSize shapeSize, ShapeId shapeId, P.GraphicFrame pGraphicFrame)
         : base(position, shapeSize, shapeId, pGraphicFrame)
     {
         var aTable = pGraphicFrame.GetFirstChild<A.Graphic>()!.GetFirstChild<A.GraphicData>()!
@@ -62,7 +62,7 @@ internal sealed class TableShape : DrawingShape
         }
     }
 
-    internal override void Render(SKCanvas canvas)
+    public override void Render(SKCanvas canvas)
     {
         var table = (Table)this.Table!;
         var rowTopPoints = this.Y;
@@ -87,7 +87,7 @@ internal sealed class TableShape : DrawingShape
     private static void RenderCellText(SKCanvas canvas, TableCell cell, decimal x, decimal y, decimal w, decimal h, string? styleFontColorHex)
     {
         var aTextBody = cell.ATableCell.TextBody!;
-        
+
         if (styleFontColorHex == null)
         {
             RenderTextWithoutStyleColor(canvas, aTextBody, x, y, w, h);
@@ -95,7 +95,7 @@ internal sealed class TableShape : DrawingShape
         }
 
         var modifiedRunProperties = ApplyStyleFontColor(aTextBody, styleFontColorHex);
-        
+
         try
         {
             RenderTextWithoutStyleColor(canvas, aTextBody, x, y, w, h);
@@ -158,14 +158,14 @@ internal sealed class TableShape : DrawingShape
         {
             var tempFill = runProp.GetFirstChild<A.SolidFill>();
             tempFill?.Remove();
-            
+
             if (originalFill != null)
             {
                 runProp.InsertAt(originalFill, 0);
             }
         }
     }
-    
+
     private static (decimal Width, decimal Height) CalculateCellDimensions(Table table, TableCell cell, int rowIdx, int colIdx)
     {
         int gridSpan = cell.ATableCell.GridSpan?.Value ?? 1;
@@ -210,7 +210,7 @@ internal sealed class TableShape : DrawingShape
     {
         // 1. Resolve Fill
         var fillColor = this.GetCellFillColor(cell);
-        
+
         // 2. Render Fill
         if (fillColor != null)
         {
@@ -260,22 +260,22 @@ internal sealed class TableShape : DrawingShape
                 var hex = this.ResolveSchemeColor("accent1");
                 return hex != null ? new Color(hex).AsSkColor() : null;
             }
-            
+
             // Banded Rows
             if (table.StyleOptions.HasBandedRows && cell.RowIndex % 2 != 0)
             {
-                 // 20% tint of Accent 1
-                 var hex = this.ResolveSchemeColor("accent1");
-                 if (hex != null)
-                 {
-                     var color = new Color(hex).AsSkColor();
+                // 20% tint of Accent 1
+                var hex = this.ResolveSchemeColor("accent1");
+                if (hex != null)
+                {
+                    var color = new Color(hex).AsSkColor();
 
-                     // Approx 20% opacity for simple visual match with the user's expectation
-                     return new SKColor(color.Red, color.Green, color.Blue, 51); 
-                 }
+                    // Approx 20% opacity for simple visual match with the user's expectation
+                    return new SKColor(color.Red, color.Green, color.Blue, 51);
+                }
             }
         }
-        
+
         return null;
     }
 
@@ -283,14 +283,14 @@ internal sealed class TableShape : DrawingShape
     {
         var table = (Table)this.Table!;
         var style = (TableStyle)table.TableStyle;
-        
+
         // Medium Style 2 - Accent 1
         if (style.Guid == MediumStyle2Accent1Guid)
         {
             // Header Row uses white text
             return table.StyleOptions.HasHeaderRow && cell.RowIndex == 0 ? "FFFFFF" : null;
         }
-        
+
         return null;
     }
 
@@ -298,7 +298,7 @@ internal sealed class TableShape : DrawingShape
     {
         var table = (Table)this.Table!;
         var style = (TableStyle)table.TableStyle;
-        
+
         // Style borders (Medium Style 2 - Accent 1 implies white borders)
         if (style.Guid != "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}")
         {

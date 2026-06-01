@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using DocumentFormat.OpenXml;
 using A = DocumentFormat.OpenXml.Drawing;
 
 // ReSharper disable InconsistentNaming
 namespace ShapeCrawler.Paragraphs;
 
-internal sealed class SCAParagraph(A.Paragraph aParagraph)
+public sealed class SCAParagraph(A.Paragraph aParagraph)
 {
-    internal int GetIndentLevel()
+    public int GetIndentLevel()
     {
         var level = aParagraph.ParagraphProperties!.Level;
         if (level is null)

@@ -18,7 +18,7 @@ public sealed class DraftLine
     internal int DraftHeight { get; private set; }
 
     internal DraftStroke? DraftStroke { get; private set; }
-    
+
     internal DocumentFormat.OpenXml.Drawing.LineEndValues? DraftHeadEndType { get; private set; }
 
     internal DocumentFormat.OpenXml.Drawing.LineEndValues? DraftTailEndType { get; private set; }

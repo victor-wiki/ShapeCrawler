@@ -13,18 +13,18 @@ namespace ShapeCrawler.Groups;
 
 using P = DocumentFormat.OpenXml.Presentation;
 
-internal sealed class GroupShape : DrawingShape
+public sealed class GroupShape : DrawingShape
 {
     private readonly P.GroupShape pGroupShape;
 
-    internal GroupShape(P.GroupShape pGroupShape)
+    public GroupShape(P.GroupShape pGroupShape)
         : base(new Position(pGroupShape), new ShapeSize(pGroupShape), new ShapeId(pGroupShape), pGroupShape)
     {
         this.pGroupShape = pGroupShape;
         this.GroupedShapes = new GroupedShapeCollection(pGroupShape.Elements<OpenXmlCompositeElement>());
     }
 
-    internal GroupShape(P.GroupShape pGroupShape, IShape[] groupingShapes, NewShapeProperties idGenerator, SlidePart slidePart)
+    public GroupShape(P.GroupShape pGroupShape, IShape[] groupingShapes, NewShapeProperties idGenerator, SlidePart slidePart)
         : base(new Position(pGroupShape), new ShapeSize(pGroupShape), new ShapeId(pGroupShape), pGroupShape)
     {
         var nonVisualGroupShapeProperties = new P.NonVisualGroupShapeProperties();
@@ -95,7 +95,7 @@ internal sealed class GroupShape : DrawingShape
         this.GroupedShapes = new GroupedShapeCollection(pGroupShape.Elements<OpenXmlCompositeElement>());
     }
 
-    public override Geometry GeometryType => Geometry.Rectangle;
+    public override Geometry? GeometryType => Geometry.Rectangle;
 
     public override IShapeCollection GroupedShapes { get; }
 
@@ -120,7 +120,7 @@ internal sealed class GroupShape : DrawingShape
     public T Shape<T>(string groupedShapeName) =>
         (T)this.GroupedShapes.First(groupedShape => groupedShape is T && groupedShape.Name == groupedShapeName);
 
-    internal override void Render(SKCanvas canvas)
+    public override void Render(SKCanvas canvas)
     {
         canvas.Save();
         this.ApplyRotation(canvas);

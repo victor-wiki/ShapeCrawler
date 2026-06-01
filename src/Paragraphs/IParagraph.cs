@@ -92,7 +92,7 @@ public interface IParagraph
     void SetLeftMargin(decimal points);
 }
 
-internal sealed class Paragraph : IParagraph
+public sealed class Paragraph : IParagraph
 {
     private readonly Lazy<Bullet> bullet;
     private readonly SCAParagraph scAParagraph;
@@ -100,7 +100,9 @@ internal sealed class Paragraph : IParagraph
     private readonly ParagraphPortions portions;
     private TextHorizontalAlignment? alignment;
 
-    internal Paragraph(A.Paragraph aParagraph)
+    public A.Paragraph SdkOpenXmlElement => this.aParagraph;
+
+    public Paragraph(A.Paragraph aParagraph)
         : this(aParagraph, new SCAParagraph(aParagraph))
     {
     }
@@ -155,7 +157,7 @@ internal sealed class Paragraph : IParagraph
             {
                 mainRun.Text!.Text = textLines[0];
             }
-            
+
             foreach (var textLine in textLines.Skip(1))
             {
                 if (!string.IsNullOrEmpty(textLine))

@@ -8,7 +8,7 @@ using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Drawing;
 
-internal sealed class ShapeFill(OpenXmlCompositeElement openXmlCompositeElement) : IShapeFill
+public sealed class ShapeFill(OpenXmlCompositeElement openXmlCompositeElement) : IShapeFill
 {
     private SlidePictureImage? pictureImage;
     private A.SolidFill? aSolidFill;

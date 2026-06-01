@@ -8,9 +8,9 @@ namespace ShapeCrawler.Drawing;
 /// <summary>
 ///     Represents drawing text box.
 /// </summary>
-internal sealed class DrawingTextBox : TextBox
+public sealed class DrawingTextBox : TextBox
 {
-    internal DrawingTextBox(TextBoxMargins margins, OpenXmlElement textBody)
+    public DrawingTextBox(TextBoxMargins margins, OpenXmlElement textBody)
         : base(margins, textBody)
     {
     }

@@ -7,12 +7,12 @@ namespace ShapeCrawler.Slides;
 /// <summary>
 ///     Represents properties for the new shapes.
 /// </summary>
-internal sealed class NewShapeProperties(IUserSlideShapeCollection shapes)
+public sealed class NewShapeProperties(IUserSlideShapeCollection shapes)
 {
     /// <summary>
     ///     Generates ID for the next new shape.
     /// </summary>
-    internal int Id()
+    public int Id()
     {
         if (shapes.Any())
         {
@@ -25,12 +25,12 @@ internal sealed class NewShapeProperties(IUserSlideShapeCollection shapes)
     /// <summary>
     ///     Generates name for the next new shape.
     /// </summary>
-    internal string Name() => $"Shape {this.Id()}";
+    public string Name() => $"Shape {this.Id()}";
 
     /// <summary>
     ///     Generates name for the next new table shape.
     /// </summary>
-    internal string TableName()
+    public string TableName()
     {
         var maxOrder = 0;
         foreach (var shape in shapes)

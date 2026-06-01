@@ -6,14 +6,16 @@ using SkiaSharp;
 namespace ShapeCrawler.Slides;
 
 /// <inheritdoc/>
-internal sealed class DrawingSlide(ILayoutSlide layoutSlide, UserSlideShapeCollection shapes, SlidePart slidePart)
+public sealed class DrawingSlide(ILayoutSlide layoutSlide, UserSlideShapeCollection shapes, SlidePart slidePart)
     : UserSlide(layoutSlide, shapes, slidePart)
 {
+    public SlidePart SlidePart => slidePart;
+
     /// <inheritdoc/>
     public override void SaveImageTo(string file)
     {
         using var fileStream = File.Create(file);
-        this.SaveImageTo(fileStream);
+        this.SaveImageTo(fileStream);        
     }
 
     /// <inheritdoc/>

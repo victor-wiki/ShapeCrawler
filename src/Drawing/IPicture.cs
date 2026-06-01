@@ -44,7 +44,7 @@ public interface IPicture
     void SendToBack();
 }
 
-internal sealed class Picture(P.Picture pPicture, A.Blip aBlip) : IPicture
+public sealed class Picture(P.Picture pPicture, A.Blip aBlip) : IPicture
 {
     public IImage Image => new SlidePictureImage(aBlip);
 

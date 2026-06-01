@@ -12,7 +12,7 @@ using Position = ShapeCrawler.Positions.Position;
 
 namespace ShapeCrawler.Shapes;
 
-internal abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shapeId, OpenXmlElement pShapeTreeElement) : IShape
+public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shapeId, OpenXmlElement pShapeTreeElement) : IShape
 {
     private const string ShapeIsNotTextHolderErrorMessage = "The shape is not a text holder.";
 
@@ -135,18 +135,28 @@ internal abstract class Shape(Position position, ShapeSize shapeSize, ShapeId sh
         }
     }
 
-    public virtual Geometry GeometryType
+    public virtual Geometry? GeometryType
     {
         get
         {
-            var shapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().First();
-            return new ShapeGeometry(shapeProperties).GeometryType;
+            var shapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().FirstOrDefault();
+
+            if (shapeProperties != null)
+            {
+                return new ShapeGeometry(shapeProperties).GeometryType;
+            }
+
+            return null;
         }
 
         set
         {
-            var shapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().First();
-            new ShapeGeometry(shapeProperties).GeometryType = value;
+            var shapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().FirstOrDefault();
+
+            if (shapeProperties != null && value != null)
+            {
+                new ShapeGeometry(shapeProperties).GeometryType = value.Value;
+            }
         }
     }
 
@@ -218,12 +228,18 @@ internal abstract class Shape(Position position, ShapeSize shapeSize, ShapeId sh
         }
     }
 
-    public IShapeFill Fill
+    public IShapeFill? Fill
     {
         get
         {
-            var pShapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().First();
-            return new ShapeFill(pShapeProperties);
+            var pShapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().FirstOrDefault();
+
+            if (pShapeProperties != null)
+            {
+                return new ShapeFill(pShapeProperties);
+            }
+
+            return null;
         }
     }
 

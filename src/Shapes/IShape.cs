@@ -158,7 +158,7 @@ public interface IShape : IPosition, IShapeGeometry
     ///     Gets grouped shapes. Returns <c>null</c> if the shape is not a group shape.
     /// </summary>
     IShapeCollection? GroupedShapes { get; }
-    
+
     /// <summary>
     ///     Gets the main shape content type.
     /// </summary>

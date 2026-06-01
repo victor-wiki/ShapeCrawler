@@ -14,7 +14,7 @@ using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Charts;
 
-internal sealed class ChartShape(Chart chartModel, P.GraphicFrame pGraphicFrame) : DrawingShape(new Position(pGraphicFrame),
+public sealed class ChartShape(Chart chartModel, P.GraphicFrame pGraphicFrame) : DrawingShape(new Position(pGraphicFrame),
     new ShapeSize(pGraphicFrame), new ShapeId(pGraphicFrame), pGraphicFrame)
 {
     private readonly Chart chart = chartModel;
@@ -62,7 +62,7 @@ internal sealed class ChartShape(Chart chartModel, P.GraphicFrame pGraphicFrame)
 
     public override ShapeContentType ContentType => ShapeContentType.Chart;
 
-    public override Geometry GeometryType
+    public override Geometry? GeometryType
     {
         get => Geometry.Rectangle;
         set => throw new SCException("Geometry type cannot be set for Chart shape.");
@@ -111,7 +111,7 @@ internal sealed class ChartShape(Chart chartModel, P.GraphicFrame pGraphicFrame)
         copiedChartReference.Id = targetChartPartRId;
     }
 
-    internal override void Render(SKCanvas canvas)
+    public override void Render(SKCanvas canvas)
     {
         if (this.chart.Type == ChartType.PieChart)
         {
@@ -469,10 +469,10 @@ internal sealed class ChartShape(Chart chartModel, P.GraphicFrame pGraphicFrame)
 
         // Draw X axis (horizontal line at the bottom)
         canvas.DrawLine(
-            chartAreaX, 
-            chartAreaY + chartAreaHeight, 
+            chartAreaX,
+            chartAreaY + chartAreaHeight,
             chartAreaX + chartAreaWidth,
-            chartAreaY + chartAreaHeight, 
+            chartAreaY + chartAreaHeight,
             axisPaint);
 
         // Draw X axis ticks and labels
@@ -695,7 +695,9 @@ internal sealed class ChartShape(Chart chartModel, P.GraphicFrame pGraphicFrame)
 
                 using var barPaint = new SKPaint
                 {
-                    Color = colors[serIndex % colors.Length], Style = SKPaintStyle.Fill, IsAntialias = true
+                    Color = colors[serIndex % colors.Length],
+                    Style = SKPaintStyle.Fill,
+                    IsAntialias = true
                 };
                 canvas.DrawRect(new SKRect(chartAreaX, barY, chartAreaX + barWidth, barY + barHeight), barPaint);
             }

@@ -10,7 +10,7 @@ using Position = ShapeCrawler.Positions.Position;
 
 namespace ShapeCrawler.Shapes;
 
-internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeId, OpenXmlElement pShapeTreeElement)
+public class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeId, OpenXmlElement pShapeTreeElement)
     : Shape(position, shapeSize, shapeId, pShapeTreeElement)
 {
     private const double Epsilon = 1e-6;
@@ -30,12 +30,12 @@ internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shap
             { "hlink", scheme => scheme.Hyperlink },
             { "folHlink", scheme => scheme.FollowedHyperlinkColor }
         };
-    
+
     /// <summary>
     ///     Renders the current shape onto the provided canvas.
     /// </summary>
     /// <param name="canvas">Target canvas.</param>
-    internal virtual void Render(SKCanvas canvas)
+    public virtual void Render(SKCanvas canvas)
     {
         switch (this.GeometryType)
         {
@@ -96,7 +96,7 @@ internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shap
             (byte)(color.Blue * shadeFactor),
             color.Alpha);
     }
-    
+
     private static void RenderArrowHead(SKCanvas canvas, SKPoint tail, SKPoint tip, A.LineEndValues type, SKPaint linePaint)
     {
         var angle = Math.Atan2(tip.Y - tail.Y, tip.X - tail.X);
@@ -140,7 +140,7 @@ internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shap
         canvas.DrawPath(path, paint);
         canvas.Restore();
     }
-    
+
     private static SKColor ApplyShadeIfNeeded(A.SchemeColor schemeColor, string hexColor)
     {
         var baseColor = new Color(hexColor).AsSkColor();
@@ -150,7 +150,7 @@ internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shap
             ? baseColor
             : ApplyShade(baseColor, shadeValue.Value);
     }
-    
+
     private static void RenderArrowEnd(SKCanvas canvas, SKPoint tail, SKPoint tip, EnumValue<A.LineEndValues>? type, SKPaint paint)
     {
         if (type?.Value is not null && type.Value != A.LineEndValues.None)
@@ -310,7 +310,7 @@ internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shap
         }
 
         using var fillPaint = new SKPaint();
-        
+
         // Adjust alpha for transparency only if Fill is possible and alpha < 100% (fully opaque/solid)
         if (this.Fill is { Alpha: < 100.0 })
         {
@@ -321,7 +321,7 @@ internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shap
         else
         {
             fillPaint.Color = fillColor.Value;
-        }    
+        }
 
         fillPaint.Style = SKPaintStyle.Fill;
         fillPaint.IsAntialias = true;
@@ -406,7 +406,7 @@ internal class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shap
             return new Color(shapeFill.Color).AsSkColor();
         }
 
-        if (shapeFill.Type != FillType.NoFill)
+        if (shapeFill?.Type != FillType.NoFill)
         {
             return null;
         }

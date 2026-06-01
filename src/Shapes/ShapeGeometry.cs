@@ -48,7 +48,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
     /// <remarks>
     ///     Only geometries listed here allow setting adjustments.
     /// </remarks>
-    private static readonly Dictionary<Geometry, int> GeometryToNumberOfAdjustmentsMap = new()
+    private static readonly Dictionary<Geometry?, int> GeometryToNumberOfAdjustmentsMap = new()
     {
         { Geometry.RoundedRectangle, 1 },
         { Geometry.SingleCornerRoundedRectangle, 1 },
@@ -60,7 +60,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         { Geometry.SnipRoundRectangle, 2 },
     };
 
-    public Geometry GeometryType
+    public Geometry? GeometryType
     {
         get
         {
@@ -75,14 +75,16 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
                 return Geometry.Rectangle;
             }
 
-            if (!ShapeTypeValuesToGeometryMap.TryGetValue(preset, out var geometryType))
+            Geometry geom;
+
+            if (!ShapeTypeValuesToGeometryMap.TryGetValue(preset, out geom))
             {
                 var presetString = preset.ToString()!;
                 var name = presetString.ToLowerInvariant().Replace("rect", "rectangle").Replace("diag", "diagonal");
                 return (Geometry)Enum.Parse(typeof(Geometry), name, true);
             }
 
-            return geometryType;
+            return geom;
         }
 
         set
@@ -101,24 +103,28 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
             aPresetGeometry ??= pShapeProperties.InsertAt<PresetGeometry>(new(), 0)
                 ?? throw new SCException("Unable to add new preset geometry");
 
-            if (!GeometryToShapeTypeValuesMap.TryGetValue(value, out var newPreset))
+            if(value!=null)
             {
-                var name = value.ToString().Replace("Rectangle", "Rect").Replace("Diagonal", "Diag");
-                var camelName = ToCamelCaseInvariant(name);
-                newPreset = new ShapeTypeValues(camelName);
+                if (!GeometryToShapeTypeValuesMap.TryGetValue(value.Value, out var newPreset))
+                {
+                    var name = value.Value.ToString().Replace("Rectangle", "Rect").Replace("Diagonal", "Diag");
+                    var camelName = ToCamelCaseInvariant(name);
+                    newPreset = new ShapeTypeValues(camelName);
+                }
+
+                if (!(newPreset as IEnumValue).IsValid)
+                {
+                    throw new SCException($"Invalid preset value {newPreset}");
+                }
+
+                aPresetGeometry.Preset = newPreset;
+
+                // Presets have different expectations of an adjusted value lists, so changing the
+                // preset means we must remove any existing adjustments, and create a new empty one
+                aPresetGeometry.RemoveAllChildren<AdjustValueList>();
+                aPresetGeometry.AppendChild<AdjustValueList>(new());
             }
-
-            if (!(newPreset as IEnumValue).IsValid)
-            {
-                throw new SCException($"Invalid preset value {newPreset}");
-            }
-
-            aPresetGeometry.Preset = newPreset;
-
-            // Presets have different expectations of an adjusted value lists, so changing the
-            // preset means we must remove any existing adjustments, and create a new empty one
-            aPresetGeometry.RemoveAllChildren<AdjustValueList>();
-            aPresetGeometry.AppendChild<AdjustValueList>(new());
+            
         }
     }
 
@@ -154,7 +160,14 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         get => this.ExtractAdjustmentsFromShapeGuide();
         set
         {
-            if (GeometryToNumberOfAdjustmentsMap.TryGetValue(this.GeometryType, out var numAdjustments))
+            if(value == null)
+            {
+                return;
+            }
+
+            Geometry? geom = this.GeometryType;
+
+            if (GeometryToNumberOfAdjustmentsMap.TryGetValue(geom, out var numAdjustments))
             {
                 if (value.Length > numAdjustments)
                 {

@@ -43,11 +43,11 @@ public interface ITableColumnCollection : IEnumerable<IColumn>
     void InsertAfter(int columnNumber);
 }
 
-internal sealed class TableColumnCollection : ITableColumnCollection
+public sealed class TableColumnCollection : ITableColumnCollection
 {
     private readonly DocumentFormat.OpenXml.Drawing.Table aTable;
 
-    internal TableColumnCollection(DocumentFormat.OpenXml.Presentation.GraphicFrame pGraphicFrame)
+    public TableColumnCollection(DocumentFormat.OpenXml.Presentation.GraphicFrame pGraphicFrame)
     {
         this.aTable = pGraphicFrame.GetFirstChild<DocumentFormat.OpenXml.Drawing.Graphic>()!.GraphicData!.GetFirstChild<DocumentFormat.OpenXml.Drawing.Table>()!;
     }

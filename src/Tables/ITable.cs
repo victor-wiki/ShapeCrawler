@@ -56,7 +56,7 @@ public interface ITable
     ITableCell Cell(int rowNumber, int columnNumber);
 }
 
-internal sealed class Table(
+public sealed class Table(
     TableRowCollection rows,
     TableColumnCollection columns,
     TableStyleOptions styleOptions,
@@ -76,7 +76,7 @@ internal sealed class Table(
 
     public ITableStyleOptions StyleOptions => styleOptions;
 
-    private A.Table ATable => pGraphicFrame.GetFirstChild<A.Graphic>()!.GraphicData!.GetFirstChild<A.Table>()!;
+    public A.Table ATable => pGraphicFrame.GetFirstChild<A.Graphic>()!.GraphicData!.GetFirstChild<A.Table>()!;
 
     public ITableCell this[int rowIndex, int columnIndex] => this.Rows[rowIndex].Cells[columnIndex];
 

@@ -38,11 +38,11 @@ public interface ILayoutSlide
     ILayoutSlideBackground Background { get; }
 }
 
-internal sealed class LayoutSlide : ILayoutSlide
+public sealed class LayoutSlide : ILayoutSlide
 {
     private readonly LayoutSlideBackground background;
 
-    internal LayoutSlide(SlideLayoutPart slideLayoutPart)
+    public LayoutSlide(SlideLayoutPart slideLayoutPart)
     {
         this.SlideLayoutPart = slideLayoutPart;
         this.Shapes = new ShapeCollection(slideLayoutPart);
@@ -66,5 +66,5 @@ internal sealed class LayoutSlide : ILayoutSlide
 
     public ILayoutSlideBackground Background => this.background;
 
-    internal SlideLayoutPart SlideLayoutPart { get; }
+    public SlideLayoutPart SlideLayoutPart { get; }
 }

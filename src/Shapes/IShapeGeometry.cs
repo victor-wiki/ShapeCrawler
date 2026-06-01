@@ -10,7 +10,7 @@ public interface IShapeGeometry
     /// <summary>
     ///     Gets or sets the geometry form.
     /// </summary>
-    Geometry GeometryType { get; set; }
+    Geometry? GeometryType { get; set; }
 
     /// <summary>
     ///     Gets or sets the corner size in percentages.

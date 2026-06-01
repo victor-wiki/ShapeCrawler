@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using NUnit.Framework;
 using ShapeCrawler.DevTests.Helpers;
 
@@ -111,8 +111,8 @@ public class MasterSlideTests : SCTest
         IShape shapeCase2 = masterSlide.Shapes.First(sp => sp.Id == 8);
 
         // Act
-        Geometry geometryTypeCase1 = shapeCase1.GeometryType;
-        Geometry geometryTypeCase2 = shapeCase2.GeometryType;
+        Geometry? geometryTypeCase1 = shapeCase1.GeometryType;
+        Geometry? geometryTypeCase2 = shapeCase2.GeometryType;
 
         // Assert
         geometryTypeCase1.Should().Be(Geometry.Rectangle);

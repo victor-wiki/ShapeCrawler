@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +20,12 @@ public interface ISeriesCollection : IReadOnlyList<ISeries>
     void RemoveAt(int index);
 }
 
-internal sealed class SeriesCollection : ISeriesCollection
+public sealed class SeriesCollection : ISeriesCollection
 {
     private readonly ChartPart chartPart;
     private readonly IEnumerable<OpenXmlElement> cXCharts;
 
-    internal SeriesCollection(ChartPart chartPart, IEnumerable<OpenXmlElement> cXCharts)
+    public SeriesCollection(ChartPart chartPart, IEnumerable<OpenXmlElement> cXCharts)
     {
         this.chartPart = chartPart;
         this.cXCharts = cXCharts;

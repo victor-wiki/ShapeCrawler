@@ -1,11 +1,11 @@
-﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml;
 using ShapeCrawler.Tables;
 using ShapeCrawler.Units;
 using A = DocumentFormat.OpenXml.Drawing;
 
 namespace ShapeCrawler.Texts;
 
-internal sealed class TextBoxMargins(OpenXmlElement textBody)
+public sealed class TextBoxMargins(OpenXmlElement textBody)
 {
     internal decimal Left
     {

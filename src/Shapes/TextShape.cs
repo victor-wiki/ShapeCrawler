@@ -7,7 +7,7 @@ using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Shapes;
 
-internal class TextShape(P.Shape pShape, DrawingTextBox textBox)
+public class TextShape(P.Shape pShape, DrawingTextBox textBox)
     : DrawingShape(new Position(pShape), new ShapeSize(pShape), new ShapeId(pShape), pShape)
 {
     public override ITextBox TextBox => textBox;
@@ -52,7 +52,7 @@ internal class TextShape(P.Shape pShape, DrawingTextBox textBox)
         }
     }
 
-    internal override void Render(SKCanvas canvas)
+    public override void Render(SKCanvas canvas)
     {
         base.Render(canvas);
 

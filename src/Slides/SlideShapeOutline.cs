@@ -7,13 +7,15 @@ using A = DocumentFormat.OpenXml.Drawing;
 
 namespace ShapeCrawler.Slides;
 
-internal sealed class SlideShapeOutline(OpenXmlCompositeElement openXmlCompositeElement) : IShapeOutline
+public sealed class SlideShapeOutline(OpenXmlCompositeElement openXmlCompositeElement) : IShapeOutline
 {
     public decimal Weight
     {
         get => this.ParseWeight();
         set => this.UpdateWeight(value);
     }
+
+    public A.Outline? SdkOpenXmlElement => openXmlCompositeElement?.GetFirstChild<A.Outline>();
 
     /// <inheritdoc/>
     public string? HexColor => this.ParseHexColor();

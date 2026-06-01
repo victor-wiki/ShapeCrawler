@@ -52,11 +52,11 @@ public interface ITableRowCollection : IEnumerable<ITableRow>
     void Add(int index, int templateRowIndex);
 }
 
-internal sealed class TableRowCollection : ITableRowCollection
+public sealed class TableRowCollection : ITableRowCollection
 {
     private readonly A.Table aTable;
 
-    internal TableRowCollection(P.GraphicFrame pGraphicFrame)
+    public TableRowCollection(P.GraphicFrame pGraphicFrame)
     {
         this.aTable = pGraphicFrame.GetFirstChild<A.Graphic>()!.GraphicData!.GetFirstChild<A.Table>()!;
     }
