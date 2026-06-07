@@ -18,13 +18,13 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
 
     public virtual decimal X
     {
-        get => position.X;
+        get => position?.X??0;
         set => position.X = value;
     }
 
     public virtual decimal Y
     {
-        get => position.Y;
+        get => position?.Y??0;
         set => position.Y = value;
     }
 
@@ -301,7 +301,7 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
             if (aTransform2D == null)
             {
                 aTransform2D = new ReferencedPShape(pShapeTreeElement).ATransform2D();
-                if (aTransform2D.Rotation is null)
+                if (aTransform2D?.Rotation is null)
                 {
                     return 0;
                 }

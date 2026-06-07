@@ -1,11 +1,11 @@
-﻿using P = DocumentFormat.OpenXml.Presentation;
+using P = DocumentFormat.OpenXml.Presentation;
 using Position = ShapeCrawler.Positions.Position;
 
 namespace ShapeCrawler.Shapes;
 
-internal sealed class LineShape : DrawingShape
+public sealed class LineShape : DrawingShape
 {
-    internal LineShape(
+    public LineShape(
         Position position,
         ShapeSize shapeSize,
         ShapeId shapeId,

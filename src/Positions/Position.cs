@@ -12,7 +12,7 @@ public sealed class Position(OpenXmlElement pShapeTreeElement)
     {
         get
         {
-            var emus = this.GetAOffset().X!.Value;
+            var emus = this.GetAOffset()?.X!.Value??0;
             return new Emus(emus).AsPoints();
         }
 
@@ -27,7 +27,7 @@ public sealed class Position(OpenXmlElement pShapeTreeElement)
     {
         get
         {
-            var emus = this.GetAOffset().Y!.Value;
+            var emus = this.GetAOffset()?.Y!.Value??0;
             return new Emus(emus).AsPoints();
         }
 
@@ -46,6 +46,6 @@ public sealed class Position(OpenXmlElement pShapeTreeElement)
             return aOffset;
         }
 
-        return new ReferencedPShape(pShapeTreeElement).ATransform2D().Offset!;
+        return new ReferencedPShape(pShapeTreeElement).ATransform2D()?.Offset!;
     }
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace ShapeCrawler.Units;
 
 public readonly ref struct Points(decimal points)
@@ -11,6 +13,6 @@ public readonly ref struct Points(decimal points)
         const decimal pointsPerInch = 72m;
         const decimal pixelsPerInch = 96m;
 
-        return points * pixelsPerInch / pointsPerInch;
+        return Math.Round(points * pixelsPerInch / pointsPerInch, 2);
     }
 }

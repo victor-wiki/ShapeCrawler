@@ -12,18 +12,29 @@ internal readonly ref struct ReferencedPShape(OpenXmlElement pShapeTreeElement)
 {
     internal Transform2D ATransform2D()
     {
-        var pShape = (P.Shape)pShapeTreeElement;
-        var openXmlPart = pShape.Ancestors<OpenXmlPartRootElement>().First().OpenXmlPart!;
-        if (openXmlPart is SlidePart slidePart)
+        if(pShapeTreeElement is P.Picture)
         {
-            var layoutPShape = LayoutPShapeOrNullOf(pShape, slidePart);
-            if (layoutPShape != null && layoutPShape.ShapeProperties!.Transform2D != null)
-            {
-                return layoutPShape.ShapeProperties.Transform2D;
-            }
-        }
+            var pic = (P.Picture)pShapeTreeElement;
 
-        return MasterPShapeOf(pShape).ShapeProperties!.Transform2D!;
+            var transform = pic.ShapeProperties!.Transform2D!;           
+
+            return transform;
+        }  
+        else
+        {
+            var pShape = (P.Shape)pShapeTreeElement;
+            var openXmlPart = pShape.Ancestors<OpenXmlPartRootElement>().First().OpenXmlPart!;
+            if (openXmlPart is SlidePart slidePart)
+            {
+                var layoutPShape = LayoutPShapeOrNullOf(pShape, slidePart);
+                if (layoutPShape != null && layoutPShape.ShapeProperties!.Transform2D != null)
+                {
+                    return layoutPShape.ShapeProperties.Transform2D;
+                }
+            }
+
+            return MasterPShapeOf(pShape).ShapeProperties!.Transform2D!;
+        }
     }
 
     private static P.Shape? PShapeOrNull(IEnumerable<P.Shape> pShapes, P.PlaceholderShape sourcePPlaceholderShape)
