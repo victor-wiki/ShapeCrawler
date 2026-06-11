@@ -10,7 +10,7 @@ This library provides a simplified object model on top of the Open XML SDK for m
     <PackageTags>ShapeCrawler Presentation PPTX  PowerPoint Slides OpenXml OOXML</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>latest</LangVersion>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageReleaseNotes>first release</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/victor-wiki/ShapeCrawler</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
@@ -23,19 +23,15 @@ This library provides a simplified object model on top of the Open XML SDK for m
     <Platforms>AnyCPU</Platforms>
     <Nullable>enable</Nullable>
     <IsTrimmable Condition="'$(TargetFramework)' == 'net10.0'">true</IsTrimmable> 
-    <Copyright></Copyright> 
-    <PackageIcon>package icon.jpg</PackageIcon> 
+    <Copyright>The project is forked from: https://github.com/ShapeCrawler/ShapeCrawler</Copyright> 
+    <PackageIcon></PackageIcon> 
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <NoWarn>OOXML0001</NoWarn>
     <PackageId>victor-wiki.$(AssemblyName)</PackageId>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
   </PropertyGroup>
-
-   <ItemGroup>
-    <None Include="Assets/package icon.jpg" Pack="true" PackagePath="" />
-  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
