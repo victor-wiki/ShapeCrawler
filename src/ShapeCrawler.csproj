@@ -3,31 +3,34 @@
   <PropertyGroup>
     <AssemblyName>ShapeCrawler</AssemblyName>
     <RootNamespace>ShapeCrawler</RootNamespace>
-    <Authors>Adam Shakhabov</Authors>
-    <Company>ShapeCrawler</Company>
+    <Authors>victor-wiki</Authors>
+    <Company></Company>
     <Description>ShapeCrawler is a .NET library for manipulating PowerPoint presentations. It provides fluent APIs to process slides without having Microsoft Office installed.
 This library provides a simplified object model on top of the Open XML SDK for manipulating PowerPoint documents without any COM+ or COM interop layers.</Description>
     <PackageTags>ShapeCrawler Presentation PPTX  PowerPoint Slides OpenXml OOXML</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>latest</LangVersion>
-    <Version>0.79.2</Version>
-    <PackageReleaseNotes>🐞Fixed TextBox.SetText throwing exception</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/ShapeCrawler/ShapeCrawler</PackageProjectUrl>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>first release</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/victor-wiki/ShapeCrawler</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
-    <RepositoryUrl>https://github.com/ShapeCrawler/ShapeCrawler</RepositoryUrl>
+    <RepositoryUrl>https://github.com/victor-wiki/ShapeCrawler</RepositoryUrl>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
-    <Title>ShapeCrawler</Title>
+    <Title>victor-wiki/ShapeCrawler</Title>
     <Configurations>Debug;Release</Configurations>
     <Platforms>AnyCPU</Platforms>
     <Nullable>enable</Nullable>
     <IsTrimmable Condition="'$(TargetFramework)' == 'net10.0'">true</IsTrimmable> 
-    <Copyright>Copyright (c) 2019-2026 Adam Shakhabov</Copyright> 
+    <Copyright></Copyright> 
     <PackageIcon>package icon.jpg</PackageIcon> 
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <NoWarn>OOXML0001</NoWarn>
+    <PackageId>victor-wiki.$(AssemblyName)</PackageId>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
    <ItemGroup>
@@ -43,10 +46,6 @@ This library provides a simplified object model on top of the Open XML SDK for m
     <NoWarn>$(NoWarn);CS0219</NoWarn>
   </PropertyGroup>  
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DocumentationFile>bin\Release\ShapeCrawler.xml</DocumentationFile>
-    <TargetFrameworks>net10.0;netstandard2.0</TargetFrameworks>
-  </PropertyGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Assets\video image.bmp" />
