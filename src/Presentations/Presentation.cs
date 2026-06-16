@@ -15,7 +15,7 @@ namespace ShapeCrawler;
 /// <inheritdoc />
 public sealed class Presentation : IPresentation
 {
-    internal readonly PresentationDocument PresDocument;
+    public readonly PresentationDocument PresDocument;
     private readonly SlideSize slideSize;
     private readonly MemoryStream presStream = new();
     private readonly Stream? inputPresStream;
