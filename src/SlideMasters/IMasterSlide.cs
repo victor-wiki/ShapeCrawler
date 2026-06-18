@@ -62,19 +62,21 @@ public interface IMasterSlide
     ILayoutSlide SlideLayout(int number);
 }
 
-internal sealed class MasterSlide : IMasterSlide
+public sealed class MasterSlide : IMasterSlide
 {
     private readonly LayoutSlideCollection layouts;
     private readonly Lazy<MasterSlideNumber?> slideNumber;
     private readonly SlideMasterPart slideMasterPart;
 
-    internal MasterSlide(SlideMasterPart slideMasterPart)
+    public MasterSlide(SlideMasterPart slideMasterPart)
     {
         this.slideMasterPart = slideMasterPart;
         this.layouts = new LayoutSlideCollection(slideMasterPart);
         this.slideNumber = new Lazy<MasterSlideNumber?>(this.CreateSlideNumber);
         this.Shapes = new ShapeCollection(this.slideMasterPart);
     }
+
+    public SlideMasterPart SlideMasterPart => this.slideMasterPart;
 
     public IImage? Background => null;
 

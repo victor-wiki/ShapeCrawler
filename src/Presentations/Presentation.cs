@@ -24,13 +24,13 @@ public sealed class Presentation : IPresentation
     /// <summary>
     ///    Opens presentation from the specified stream.
     /// </summary>
-    public Presentation(Stream stream)
+    public Presentation(Stream stream, bool isEditable = true)
     {
         this.inputPresStream = stream;
         this.inputPresStream.Position = 0;
         this.inputPresStream.CopyTo(this.presStream);
 
-        this.PresDocument = PresentationDocument.Open(this.presStream, true);
+        this.PresDocument = PresentationDocument.Open(this.presStream, isEditable);
         this.slideSize = new SlideSize(this.PresDocument.PresentationPart!.Presentation!.SlideSize!);
         this.MasterSlides = new MasterSlideCollection(this.PresDocument.PresentationPart!.SlideMasterParts);
         this.Sections = new SectionCollection(this.PresDocument);
@@ -51,13 +51,13 @@ public sealed class Presentation : IPresentation
     /// <summary>
     ///    Opens presentation from the specified file.
     /// </summary>
-    public Presentation(string file)
+    public Presentation(string file, bool isEditable = true)
     {
         this.inputPresFile = file;
         using var fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
         fileStream.CopyTo(this.presStream);
 
-        this.PresDocument = PresentationDocument.Open(this.presStream, true);
+        this.PresDocument = PresentationDocument.Open(this.presStream, isEditable);
         this.slideSize = new SlideSize(this.PresDocument.PresentationPart!.Presentation!.SlideSize!);
         this.MasterSlides = new MasterSlideCollection(this.PresDocument.PresentationPart!.SlideMasterParts);
         this.Sections = new SectionCollection(this.PresDocument);
