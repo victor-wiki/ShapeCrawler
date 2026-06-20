@@ -331,7 +331,7 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
     ///     Use this property for internal operations that need to read or modify the live
     ///     element stored in the shape tree, rather than a separate copy.
     /// </summary>
-    internal OpenXmlElement OpenXmlElement => pShapeTreeElement;
+    public OpenXmlElement OpenXmlElement => pShapeTreeElement;
 
     protected OpenXmlElement PShapeTreeElement => pShapeTreeElement;
 

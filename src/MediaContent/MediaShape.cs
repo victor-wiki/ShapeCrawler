@@ -11,11 +11,11 @@ using Position = ShapeCrawler.Positions.Position;
 
 namespace ShapeCrawler.MediaContent;
 
-internal sealed class MediaShape : DrawingShape
+public sealed class MediaShape : DrawingShape
 {
     private readonly P.Picture pPicture;
 
-    internal MediaShape(Position position, ShapeSize shapeSize, ShapeId shapeId, P.Picture pPicture)
+    public MediaShape(Position position, ShapeSize shapeSize, ShapeId shapeId, P.Picture pPicture)
         : base(position, shapeSize, shapeId, pPicture)
     {
         this.pPicture = pPicture;

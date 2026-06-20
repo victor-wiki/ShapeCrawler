@@ -15,6 +15,8 @@ public sealed class ShapeFill(OpenXmlCompositeElement openXmlCompositeElement) :
     private A.GradientFill? aGradFill;
     private A.BlipFill? aBlipFill;
 
+    public OpenXmlCompositeElement OpenXmlElement => openXmlCompositeElement;
+
     public string? Color
     {
         get

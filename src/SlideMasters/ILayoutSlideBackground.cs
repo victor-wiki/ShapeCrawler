@@ -35,7 +35,7 @@ public interface ILayoutSlideBackground
     ///     Gets the background picture image stream.
     /// </summary>
     /// <returns>The image stream of the background picture.</returns>
-    MemoryStream Picture();
+    MemoryStream? Picture();
 }
 
 internal sealed class LayoutSlideBackground(SlideLayoutPart slideLayoutPart) : ILayoutSlideBackground
@@ -91,14 +91,15 @@ internal sealed class LayoutSlideBackground(SlideLayoutPart slideLayoutPart) : I
         }
     }
 
-    public MemoryStream Picture()
+    public MemoryStream? Picture()
     {
         var pBackground = slideLayoutPart.SlideLayout!.CommonSlideData?.GetFirstChild<P.Background>();
         var aBlipFill = pBackground?.GetFirstChild<P.BackgroundProperties>()?.GetFirstChild<A.BlipFill>();
         var aBlip = aBlipFill?.Blip;
         if (aBlip?.Embed?.Value is null)
         {
-            throw new InvalidOperationException("Background picture not found.");
+           // throw new InvalidOperationException("Background picture not found.");
+           return null;
         }
 
         var imagePart = (ImagePart)slideLayoutPart.GetPartById(aBlip.Embed.Value);
