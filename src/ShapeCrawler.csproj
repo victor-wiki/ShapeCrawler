@@ -10,9 +10,10 @@ This library provides a simplified object model on top of the Open XML SDK for m
     <PackageTags>ShapeCrawler Presentation PPTX  PowerPoint Slides OpenXml OOXML</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>latest</LangVersion>
-    <Version>1.0.3</Version>
-    <PackageReleaseNotes>1. Presentation: isEditable as parameter;
-2. MasterSlide: make it to public.</PackageReleaseNotes>
+    <Version>1.0.4</Version>
+    <PackageReleaseNotes>1. make "OpenXmlElement" property as public;
+2. make "MediaShape" as public;
+3. add "OpenXmlElement" to ShapeFill.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/victor-wiki/ShapeCrawler</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/victor-wiki/ShapeCrawler</RepositoryUrl>
@@ -30,8 +31,8 @@ This library provides a simplified object model on top of the Open XML SDK for m
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <NoWarn>OOXML0001</NoWarn>
     <PackageId>victor-wiki.$(AssemblyName)</PackageId>
-    <AssemblyVersion>1.0.3</AssemblyVersion>
-    <FileVersion>1.0.3</FileVersion>
+    <AssemblyVersion>1.0.4</AssemblyVersion>
+    <FileVersion>1.0.4</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
