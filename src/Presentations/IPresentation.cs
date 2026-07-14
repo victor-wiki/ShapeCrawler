@@ -19,12 +19,12 @@ public interface IPresentation : IDisposable
     /// <summary>
     ///     Gets or sets presentation slides width in points.
     /// </summary>
-    decimal SlideWidth { get; set; }
+    double SlideWidth { get; set; }
 
     /// <summary>
     ///     Gets or sets the presentation slides height in points.
     /// </summary>
-    decimal SlideHeight { get; set; }
+    double SlideHeight { get; set; }
 
     /// <summary>
     ///     Gets the collection of the slide masters.

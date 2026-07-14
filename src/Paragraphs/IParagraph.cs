@@ -49,7 +49,7 @@ public interface IParagraph
     /// <summary>
     ///    Gets paragraph left margin in points.
     /// </summary>
-    decimal LeftMargin { get; }
+    double LeftMargin { get; }
 
     /// <summary>
     ///     Gets or sets paragraph indent level.
@@ -59,7 +59,7 @@ public interface IParagraph
     /// <summary>
     ///     Gets or sets paragraph first line indent in points.
     /// </summary>
-    decimal FirstLineIndent { get; set; }
+    double FirstLineIndent { get; set; }
 
     /// <summary>
     ///     Finds and replaces text.
@@ -89,7 +89,7 @@ public interface IParagraph
     /// <summary>
     ///    Sets paragraph left margin in points.
     /// </summary>
-    void SetLeftMargin(decimal points);
+    void SetLeftMargin(double points);
 }
 
 public sealed class Paragraph : IParagraph
@@ -218,7 +218,7 @@ public sealed class Paragraph : IParagraph
         }
     }
 
-    public decimal LeftMargin
+    public double LeftMargin
     {
         get
         {
@@ -238,7 +238,7 @@ public sealed class Paragraph : IParagraph
         }
     }
 
-    public decimal FirstLineIndent
+    public double FirstLineIndent
     {
         get
         {
@@ -317,7 +317,7 @@ public sealed class Paragraph : IParagraph
         }
     }
 
-    public void SetLeftMargin(decimal points)
+    public void SetLeftMargin(double points)
     {
         this.LeftMargin = points;
     }
@@ -369,7 +369,7 @@ public sealed class Paragraph : IParagraph
         return levelChar >= '0' && levelChar <= '9' ? levelChar - '0' : 0;
     }
 
-    private decimal IndentationFromStylesOrDefault(string attributeLocalName)
+    private double IndentationFromStylesOrDefault(string attributeLocalName)
     {
         var indentLevel = this.IndentLevel;
 

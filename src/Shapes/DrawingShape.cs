@@ -159,11 +159,11 @@ public class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeI
         }
     }
 
-    private decimal GetShapeOutlineWidth()
+    private double GetShapeOutlineWidth()
     {
         var shapeOutline = this.Outline;
 
-        if (shapeOutline.Weight > 0)
+        if (shapeOutline?.Weight > 0)
         {
             return new Points(shapeOutline.Weight).AsPixels();
         }
@@ -172,7 +172,7 @@ public class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeI
         return styleWidth;
     }
 
-    private decimal GetStyleOutlineWidth()
+    private double GetStyleOutlineWidth()
     {
         var lineRef = this.PShapeTreeElement switch
         {
@@ -191,7 +191,7 @@ public class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeI
             return 0;
         }
 
-        var defaultWidth = lineRef.Index.Value * 0.75m;
+        var defaultWidth = lineRef.Index.Value * 0.75d;
 
         return new Points(defaultWidth).AsPixels();
     }
@@ -218,11 +218,11 @@ public class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeI
         var height = new Points(this.Height).AsPixels();
         var rect = new SKRect((float)x, (float)y, (float)(x + width), (float)(y + height));
 
-        var cornerRadius = 0m;
+        var cornerRadius = 0d;
         if (this.GeometryType == Geometry.RoundedRectangle)
         {
             var shortestSide = Math.Min(width, height);
-            cornerRadius = this.CornerSize / 100m * (shortestSide / 2m);
+            cornerRadius = this.CornerSize / 100d * (shortestSide / 2d);
         }
 
         canvas.Save();
@@ -301,7 +301,7 @@ public class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeI
         RenderArrowEnd(canvas, startPoint, endPoint, tailEnd?.Type, outlinePaint);
     }
 
-    private void RenderFill(SKCanvas canvas, SKRect rect, decimal cornerRadius)
+    private void RenderFill(SKCanvas canvas, SKRect rect, double cornerRadius)
     {
         var fillColor = this.GetShapeFillColor();
         if (fillColor is null)
@@ -336,7 +336,7 @@ public class DrawingShape(Position position, ShapeSize shapeSize, ShapeId shapeI
         }
     }
 
-    private void RenderOutline(SKCanvas canvas, SKRect rect, decimal cornerRadius)
+    private void RenderOutline(SKCanvas canvas, SKRect rect, double cornerRadius)
     {
         var outlineColor = this.GetShapeOutlineColor();
         var strokeWidth = GetShapeOutlineWidth();

@@ -1,17 +1,17 @@
-﻿using ShapeCrawler.Fonts;
+using ShapeCrawler.Fonts;
 using A = DocumentFormat.OpenXml.Drawing;
 
 namespace ShapeCrawler.Texts;
 
 internal class MasterSlideNumberSize(A.DefaultRunProperties aDefaultRunProperties) : IFontSize
 {
-    public decimal Size
+    public double Size
     {
         get
         {
             var hundredPoints = aDefaultRunProperties.FontSize!.Value;
 
-            return hundredPoints / 100m;
+            return hundredPoints / 100d;
         }
 
         set

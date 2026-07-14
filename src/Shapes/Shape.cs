@@ -16,25 +16,25 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
 {
     private const string ShapeIsNotTextHolderErrorMessage = "The shape is not a text holder.";
 
-    public virtual decimal X
+    public virtual double X
     {
         get => position?.X??0;
         set => position.X = value;
     }
 
-    public virtual decimal Y
+    public virtual double Y
     {
         get => position?.Y??0;
         set => position.Y = value;
     }
 
-    public virtual decimal Width
+    public virtual double Width
     {
         get => shapeSize.Width;
         set => shapeSize.Width = value;
     }
 
-    public virtual decimal Height
+    public virtual double Height
     {
         get => shapeSize.Height;
         set => shapeSize.Height = value;
@@ -160,7 +160,7 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
         }
     }
 
-    public decimal CornerSize
+    public double CornerSize
     {
         get
         {
@@ -175,7 +175,7 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
         }
     }
 
-    public decimal[] Adjustments
+    public double[] Adjustments
     {
         get
         {
@@ -219,12 +219,18 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
         }
     }
 
-    public IShapeOutline Outline
+    public IShapeOutline? Outline
     {
         get
         {
-            var pShapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().First();
-            return new SlideShapeOutline(pShapeProperties);
+            var pShapeProperties = pShapeTreeElement.Descendants<P.ShapeProperties>().FirstOrDefault();
+
+            if(pShapeProperties!=null)
+            {
+                return new SlideShapeOutline(pShapeProperties);
+            }
+
+            return null;
         }
     }
 
@@ -353,7 +359,7 @@ public abstract class Shape(Position position, ShapeSize shapeSize, ShapeId shap
 
     public virtual void SetFontName(string fontName) => throw new SCException(ShapeIsNotTextHolderErrorMessage);
 
-    public virtual void SetFontSize(decimal fontSize) =>
+    public virtual void SetFontSize(double fontSize) =>
         throw new SCException(ShapeIsNotTextHolderErrorMessage);
 
     public virtual void SetFontColor(string colorHex) =>

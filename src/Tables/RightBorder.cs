@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Drawing;
 using ShapeCrawler.Units;
 using A = DocumentFormat.OpenXml.Drawing;
@@ -7,7 +7,7 @@ namespace ShapeCrawler.Tables;
 
 internal class RightBorder(A.TableCellProperties aTableCellProperties) : IBorder
 {
-    public decimal Width
+    public double Width
     {
         get
         {

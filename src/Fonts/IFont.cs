@@ -1,4 +1,4 @@
-﻿#pragma warning disable IDE0130
+#pragma warning disable IDE0130
 namespace ShapeCrawler;
 #pragma warning restore IDE0130
 
@@ -10,5 +10,5 @@ public interface IFont
     /// <summary>
     ///     Gets or sets font size in points.
     /// </summary>
-    decimal Size { get; set; }
+    double Size { get; set; }
 }

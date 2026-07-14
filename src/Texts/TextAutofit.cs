@@ -19,7 +19,7 @@ internal sealed class TextAutofit(
     OpenXmlElement textBody)
 {
     // TODO: check whether it is possible to define correct DPI in runtime
-    private const decimal DpiConversionFactor = 96m / 72m; // SkiaSharp uses 72 DPI, ShapeCrawler uses 96 DPI. 96/72 = 4/3 ≈ 1.33
+    private const double DpiConversionFactor = 96d / 72d; // SkiaSharp uses 72 DPI, ShapeCrawler uses 96 DPI. 96/72 = 4/3 ≈ 1.33
 
     /// <summary>
     ///     Applies to autofit by resizing the parent shape on demand.
@@ -35,7 +35,7 @@ internal sealed class TextAutofit(
         var shapeWidthCapacity = shapeSize.Width - margins.Left - margins.Right;
         var shapeHeightCapacity = shapeSize.Height - margins.Top - margins.Bottom;
 
-        decimal textHeight = 0;
+        double textHeight = 0;
         foreach (var paragraph in paragraphs)
         {
             var paragraphPortion = paragraph.Portions.OfType<TextParagraphPortion>();
@@ -107,7 +107,7 @@ internal sealed class TextAutofit(
         // without noticeably oversizing shapes.
 
         // Used to avoid edge clipping due to font metrics and rounding differences between measured and rendered text.
-        const decimal widthTolerance = 2m;
+        const double widthTolerance = 2d;
         var newWidth =
             (int)(textWidth *
                   DpiConversionFactor)
@@ -115,7 +115,7 @@ internal sealed class TextAutofit(
         shapeSize.Width = newWidth;
     }
 
-    private void UpdateHeight(decimal textHeight, decimal shapeHeightCapacity)
+    private void UpdateHeight(double textHeight, double shapeHeightCapacity)
     {
         var parentShape = textBody.Parent!;
         var requiredHeight = textHeight + margins.Top + margins.Bottom;

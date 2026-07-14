@@ -5,7 +5,7 @@ namespace ShapeCrawler.Drawing;
 
 internal sealed class DrawingFont(ITextPortionFont? font)
 {
-    private const decimal DefaultFontSize = 12m;
+    private const double DefaultFontSize = 12d;
 
     internal static float BaselineOffset(SKFont skFont)
     {

@@ -1,4 +1,4 @@
-﻿#pragma warning disable IDE0130
+#pragma warning disable IDE0130
 namespace ShapeCrawler;
 #pragma warning restore IDE0130
 
@@ -10,7 +10,7 @@ public interface IShapeOutline
     /// <summary>
     ///     Gets or sets outline weight in points.
     /// </summary>
-    decimal Weight { get; set; }
+    double Weight { get; set; }
 
     /// <summary>
     ///     Gets color in hexadecimal format. Returns <see langword="null"/> if outline is not filled.

@@ -59,7 +59,7 @@ internal sealed class TableCellTextBox(A.TableCell aTableCell) : ITextBox
         }
     }
 
-    public decimal LeftMargin
+    public double LeftMargin
     {
         get => new LeftRightMargin(aTableCell.TableCellProperties!.LeftMargin).Value;
         set
@@ -70,7 +70,7 @@ internal sealed class TableCellTextBox(A.TableCell aTableCell) : ITextBox
         }
     }
 
-    public decimal RightMargin
+    public double RightMargin
     {
         get => new LeftRightMargin(aTableCell.TableCellProperties!.RightMargin).Value;
         set
@@ -81,7 +81,7 @@ internal sealed class TableCellTextBox(A.TableCell aTableCell) : ITextBox
         }
     }
 
-    public decimal TopMargin
+    public double TopMargin
     {
         get => new TopBottomMargin(aTableCell.TableCellProperties!.TopMargin).Value;
         set
@@ -92,7 +92,7 @@ internal sealed class TableCellTextBox(A.TableCell aTableCell) : ITextBox
         }
     }
 
-    public decimal BottomMargin
+    public double BottomMargin
     {
         get => new TopBottomMargin(aTableCell.TableCellProperties!.BottomMargin).Value;
         set
@@ -286,7 +286,7 @@ internal sealed class TableCellTextBox(A.TableCell aTableCell) : ITextBox
         return cellsInRow.IndexOf(aTableCell);
     }
 
-    private decimal GetWidthCapacityPoints(A.Table aTable, int colIndex)
+    private double GetWidthCapacityPoints(A.Table aTable, int colIndex)
     {
         var gridColumns = aTable.TableGrid!.Elements<A.GridColumn>().ToList();
         if (colIndex >= gridColumns.Count)
@@ -298,9 +298,9 @@ internal sealed class TableCellTextBox(A.TableCell aTableCell) : ITextBox
         return columnWidthPts - this.LeftMargin - this.RightMargin;
     }
 
-    private decimal CalculateTextHeight(decimal widthCapacity)
+    private double CalculateTextHeight(double widthCapacity)
     {
-        decimal textHeight = 0;
+        double textHeight = 0;
         foreach (var paragraph in this.Paragraphs)
         {
             var paragraphPortions = paragraph.Portions.OfType<TextParagraphPortion>();

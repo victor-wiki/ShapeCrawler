@@ -31,7 +31,7 @@ public sealed class TableShape : DrawingShape
 
     public override ShapeContentType ContentType => ShapeContentType.Table;
 
-    public override decimal Width
+    public override double Width
     {
         get => base.Width;
         set
@@ -46,7 +46,7 @@ public sealed class TableShape : DrawingShape
         }
     }
 
-    public override decimal Height
+    public override double Height
     {
         get => base.Height;
         set
@@ -75,7 +75,7 @@ public sealed class TableShape : DrawingShape
         }
     }
 
-    private static SKRect CreateRectFromPoints(decimal x, decimal y, decimal width, decimal height)
+    private static SKRect CreateRectFromPoints(double x, double y, double width, double height)
     {
         return new SKRect(
             (float)new Points(x).AsPixels(),
@@ -84,7 +84,7 @@ public sealed class TableShape : DrawingShape
             (float)new Points(y + height).AsPixels());
     }
 
-    private static void RenderCellText(SKCanvas canvas, TableCell cell, decimal x, decimal y, decimal w, decimal h, string? styleFontColorHex)
+    private static void RenderCellText(SKCanvas canvas, TableCell cell, double x, double y, double w, double h, string? styleFontColorHex)
     {
         var aTextBody = cell.ATableCell.TextBody!;
 
@@ -106,7 +106,7 @@ public sealed class TableShape : DrawingShape
         }
     }
 
-    private static void RenderTextWithoutStyleColor(SKCanvas canvas, A.TextBody aTextBody, decimal x, decimal y, decimal w, decimal h)
+    private static void RenderTextWithoutStyleColor(SKCanvas canvas, A.TextBody aTextBody, double x, double y, double w, double h)
     {
         var textBoxMargins = new TextBoxMargins(aTextBody);
         var drawingTextBox = new DrawingTextBox(textBoxMargins, aTextBody);
@@ -166,18 +166,18 @@ public sealed class TableShape : DrawingShape
         }
     }
 
-    private static (decimal Width, decimal Height) CalculateCellDimensions(Table table, TableCell cell, int rowIdx, int colIdx)
+    private static (double Width, double Height) CalculateCellDimensions(Table table, TableCell cell, int rowIdx, int colIdx)
     {
         int gridSpan = cell.ATableCell.GridSpan?.Value ?? 1;
         int rowSpan = cell.ATableCell.RowSpan?.Value ?? 1;
 
-        decimal cellTotalWidth = 0;
+        double cellTotalWidth = 0;
         for (int k = 0; k < gridSpan; k++)
         {
             cellTotalWidth += table.Columns[colIdx + k].Width;
         }
 
-        decimal cellTotalHeight = 0;
+        double cellTotalHeight = 0;
         for (int k = 0; k < rowSpan; k++)
         {
             cellTotalHeight += table.Rows[rowIdx + k].Height;
@@ -186,7 +186,7 @@ public sealed class TableShape : DrawingShape
         return (cellTotalWidth, cellTotalHeight);
     }
 
-    private void RenderRow(SKCanvas canvas, Table table, int rowIdx, ref decimal colLeftPoints, decimal rowTopPoints)
+    private void RenderRow(SKCanvas canvas, Table table, int rowIdx, ref double colLeftPoints, double rowTopPoints)
     {
         var row = table.Rows[rowIdx];
         var columns = table.Columns;
@@ -206,7 +206,7 @@ public sealed class TableShape : DrawingShape
         }
     }
 
-    private void RenderCell(SKCanvas canvas, TableCell cell, decimal x, decimal y, decimal w, decimal h)
+    private void RenderCell(SKCanvas canvas, TableCell cell, double x, double y, double w, double h)
     {
         // 1. Resolve Fill
         var fillColor = this.GetCellFillColor(cell);
@@ -294,7 +294,7 @@ public sealed class TableShape : DrawingShape
         return null;
     }
 
-    private void RenderBorders(SKCanvas canvas, decimal x, decimal y, decimal w, decimal h)
+    private void RenderBorders(SKCanvas canvas, double x, double y, double w, double h)
     {
         var table = (Table)this.Table!;
         var style = (TableStyle)table.TableStyle;

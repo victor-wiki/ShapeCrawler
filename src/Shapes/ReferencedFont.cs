@@ -26,7 +26,7 @@ internal sealed class ReferencedFont(ReferencedFontColor fontColor, A.Text aText
         return null;
     }
 
-    internal decimal? SizeOrNull()
+    internal double? SizeOrNull()
     {
         var openXmlPart = aText.Ancestors<OpenXmlPartRootElement>().First().OpenXmlPart!;
         var aParagraph = aText.Ancestors<A.Paragraph>().First();
@@ -54,7 +54,7 @@ internal sealed class ReferencedFont(ReferencedFontColor fontColor, A.Text aText
                 var font = fonts.FontOrNull(indentLevel);
                 if (font.HasValue)
                 {
-                    return (int)font.Value.Size! / 100m;
+                    return (int)font.Value.Size! / 100d;
                 }
             }
 
@@ -64,7 +64,7 @@ internal sealed class ReferencedFont(ReferencedFontColor fontColor, A.Text aText
             var bodyStyleFont = bodyStyleFonts.FontOrNull(indentLevel);
             if (bodyStyleFont.HasValue)
             {
-                return (int)bodyStyleFont.Value.Size! / 100m;
+                return (int)bodyStyleFont.Value.Size! / 100d;
             }
 
             return null;
@@ -74,10 +74,10 @@ internal sealed class ReferencedFont(ReferencedFontColor fontColor, A.Text aText
         var layoutIndentFont = layoutFonts.FontOrNull(indentLevel);
         if (layoutIndentFont is { Size: not null })
         {
-            return (int)layoutIndentFont.Value.Size! / 100m;
+            return (int)layoutIndentFont.Value.Size! / 100d;
         }
 
-        return this.MasterFontSizeOrNull(refLayoutPShapeOfSlide, indentLevel) / 100m;
+        return this.MasterFontSizeOrNull(refLayoutPShapeOfSlide, indentLevel) / 100d;
     }
 
     internal A.LatinFont? ALatinFontOrNull()

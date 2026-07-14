@@ -6,19 +6,19 @@ namespace ShapeCrawler.Charts;
 
 internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlignment
 {
-    public decimal CustomAngle
+    public double CustomAngle
     {
         get => this.GetCustomAngle();
         set => this.SetCustomAngle(value);
     }
 
-    public decimal? X
+    public double? X
     {
         get => this.GetX();
         set => this.SetX(value);
     }
 
-    public decimal? Y
+    public double? Y
     {
         get => this.GetY();
         set => this.SetY(value);
@@ -74,7 +74,7 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         }
     }
 
-    private static void EnsureLeftValue(C.ManualLayout cManualLayout, decimal value)
+    private static void EnsureLeftValue(C.ManualLayout cManualLayout, double value)
     {
         // Get or create Left value
         var cLeft = cManualLayout.GetFirstChild<C.Left>();
@@ -146,7 +146,7 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         }
     }
 
-    private static void EnsureTopValue(C.ManualLayout cManualLayout, decimal value)
+    private static void EnsureTopValue(C.ManualLayout cManualLayout, double value)
     {
         // Get or create Top value
         var cTop = cManualLayout.GetFirstChild<C.Top>();
@@ -173,7 +173,7 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         }
     }
 
-    private decimal GetCustomAngle()
+    private double GetCustomAngle()
     {
         var cChart = chartPart.ChartSpace!.GetFirstChild<C.Chart>();
         var cTitle = cChart?.Title;
@@ -192,13 +192,13 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         if (aBodyProperties?.Rotation?.Value != null)
         {
             // Open XML rotation angles are stored in units of 1/60,000th of a degree
-            return aBodyProperties.Rotation.Value / 60000m;
+            return aBodyProperties.Rotation.Value / 60000d;
         }
 
         return 0;
     }
 
-    private void SetCustomAngle(decimal angle)
+    private void SetCustomAngle(double angle)
     {
         var cChart = chartPart.ChartSpace!.GetFirstChild<C.Chart>();
         var cTitle = cChart?.Title;
@@ -239,11 +239,11 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         }
 
         // OpenXML rotation angles are stored in units of 1/60,000th of a degree
-        var rotationInSixtyThousandths = (int)(angle * 60000m);
+        var rotationInSixtyThousandths = (int)(angle * 60000d);
         aBodyProperties.Rotation = rotationInSixtyThousandths;
     }
 
-    private decimal? GetX()
+    private double? GetX()
     {
         var cChart = chartPart.ChartSpace!.GetFirstChild<C.Chart>();
         var cTitle = cChart?.Title;
@@ -260,10 +260,10 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         }
 
         var cLeft = cManualLayout.GetFirstChild<C.Left>();
-        return cLeft?.Val?.Value != null ? (decimal)cLeft.Val.Value : null;
+        return cLeft?.Val?.Value != null ? cLeft.Val.Value : null;
     }
 
-    private void SetX(decimal? value)
+    private void SetX(double? value)
     {
         var (cLayout, cManualLayout) = this.EnsureLayoutStructure();
 
@@ -306,7 +306,7 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         return (cLayout, cManualLayout);
     }
 
-    private decimal? GetY()
+    private double? GetY()
     {
         var cChart = chartPart.ChartSpace!.GetFirstChild<C.Chart>();
         var cTitle = cChart?.Title;
@@ -323,10 +323,10 @@ internal sealed class ChartTitleAlignment(ChartPart chartPart) : IChartTitleAlig
         }
 
         var cTop = cManualLayout.GetFirstChild<C.Top>();
-        return cTop?.Val?.Value != null ? (decimal)cTop.Val.Value : null;
+        return cTop?.Val?.Value != null ? (double)cTop.Val.Value : null;
     }
 
-    private void SetY(decimal? value)
+    private void SetY(double? value)
     {
         var (cLayout, cManualLayout) = this.EnsureLayoutStructure();
 

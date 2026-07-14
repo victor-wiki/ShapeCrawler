@@ -8,7 +8,7 @@ using P = DocumentFormat.OpenXml.Presentation;
 
 namespace ShapeCrawler.Shapes;
 
-internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShapeGeometry
+public sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShapeGeometry
 {
     /// <summary>
     ///     Corner size on new rounded rectangles, before adjustments are applied.
@@ -18,7 +18,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
     ///     adjustments. The visual appearance of an unadjusted corner is the same as a corner
     ///     with a size of this value.
     /// </remarks>
-    private const decimal DefaultCornerSize = 35m;
+    private const double DefaultCornerSize = 35d;
 
     /// <summary>
     ///     Mapping of geometries to shape types in outlying cases.
@@ -28,7 +28,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
     ///     mapped with substring substitution. These are the outliers which require special
     ///     handling.
     /// </remarks>
-    private static readonly Dictionary<Geometry, ShapeTypeValues> GeometryToShapeTypeValuesMap = new()
+    public static readonly Dictionary<Geometry, ShapeTypeValues> GeometryToShapeTypeValuesMap = new()
     {
         { Geometry.RoundedRectangle, ShapeTypeValues.RoundRectangle },
         { Geometry.SingleCornerRoundedRectangle, ShapeTypeValues.Round1Rectangle },
@@ -39,7 +39,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         { Geometry.RightTriangle, ShapeTypeValues.RightTriangle },
     };
 
-    private static readonly Dictionary<ShapeTypeValues, Geometry> ShapeTypeValuesToGeometryMap
+    public static readonly Dictionary<ShapeTypeValues, Geometry> ShapeTypeValuesToGeometryMap
         = GeometryToShapeTypeValuesMap.ToDictionary(x => x.Value, x => x.Key);
 
     /// <summary>
@@ -128,7 +128,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         }
     }
 
-    public decimal CornerSize
+    public double CornerSize
     {
         get
         {
@@ -155,7 +155,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         }
     }
 
-    public decimal[] Adjustments
+    public double[] Adjustments
     {
         get => this.ExtractAdjustmentsFromShapeGuide();
         set
@@ -220,7 +220,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         return char.ToLowerInvariant(value[0]) + value[1..];
     }
 
-    private static decimal ExtractAdjustmentFromShapeGuide(ShapeGuide sg)
+    private static double ExtractAdjustmentFromShapeGuide(ShapeGuide sg)
     {
         var formula = sg.Formula?.Value ?? throw new SCException("Malformed geometry. Shape guide has no formula.");
 
@@ -240,10 +240,10 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
 
         var value = int.Parse(match.Groups["value"].Value);
 
-        return value / 500m;
+        return value / 500.0;
     }
 
-    private decimal[] ExtractAdjustmentsFromShapeGuide()
+    private double[] ExtractAdjustmentsFromShapeGuide()
     {
         return this.APresetGeometry?
             .AdjustValueList?
@@ -255,7 +255,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
             ?? throw new SCException("Malformed geometry.");
     }
 
-    private void InjectSingleAdjustmentToShapeGuide(decimal[] values)
+    private void InjectSingleAdjustmentToShapeGuide(double[] values)
     {
         if (values.Length != 1)
         {
@@ -265,7 +265,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         this.Inject("adj", values[0]);
     }
 
-    private void InjectMultipleAdjustmentsIntoShapeGuide(decimal[] values)
+    private void InjectMultipleAdjustmentsIntoShapeGuide(double[] values)
     {
         for (var i = 0; i < values.Length; i++)
         {
@@ -273,7 +273,7 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
         }
     }
 
-    private void Inject(string name, decimal value)
+    private void Inject(string name, double value)
     {
         var avList = this.APresetGeometry?.AdjustValueList
             ?? throw new SCException("Malformed geometry. Missing AdjustValueList.");
@@ -292,6 +292,6 @@ internal sealed class ShapeGeometry(P.ShapeProperties pShapeProperties) : IShape
             ?? avList.AppendChild(new ShapeGuide() { Name = name })
             ?? throw new SCException("Failed attempting to add a shape guide to AdjustValueList");
 
-        sg.Formula = new StringValue($"val {(int)(value * 500m)}");
+        sg.Formula = new StringValue($"val {(int)(value * 500d)}");
     }
 }

@@ -131,8 +131,8 @@ internal sealed class ChartShapeCollection(SlidePart slidePart)
                 new ApplicationNonVisualDrawingProperties()
             ),
             Transform = new Transform(
-                new A.Offset { X = new Points((decimal)x).AsEmus(), Y = new Points((decimal)y).AsEmus() },
-                new A.Extents { Cx = new Points((decimal)width).AsEmus(), Cy = new Points((decimal)height).AsEmus() }
+                new A.Offset { X = new Points(x).AsEmus(), Y = new Points(y).AsEmus() },
+                new A.Extents { Cx = new Points(width).AsEmus(), Cy = new Points(height).AsEmus() }
             ),
             Graphic = new A.Graphic(
                 new A.GraphicData(

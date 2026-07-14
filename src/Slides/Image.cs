@@ -192,12 +192,12 @@ internal sealed class Image
 
             if (height == 500)
             {
-                width = (uint)(height * (decimal)image.Width / image.Height);
+                width = (uint)(height * (double)image.Width / image.Height);
             }
 
             if (width == 500)
             {
-                height = (uint)(width * (decimal)image.Height / image.Width);
+                height = (uint)(width * (double)image.Height / image.Width);
             }
 
             image.Resize(width, height);

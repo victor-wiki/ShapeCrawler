@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Drawing;
 using ShapeCrawler.Units;
 using A = DocumentFormat.OpenXml.Drawing;
@@ -7,7 +7,7 @@ namespace ShapeCrawler.Tables;
 
 internal class TopBorder(A.TableCellProperties aTableCellProperties) : IBorder
 {
-    public decimal Width
+    public double Width
     {
         get => this.GetWidth();
         set => this.UpdateWidth(value);
@@ -40,7 +40,7 @@ internal class TopBorder(A.TableCellProperties aTableCellProperties) : IBorder
         solidFill.RgbColorModelHex.Val = new HexBinaryValue(color);
     }
 
-    private void UpdateWidth(decimal points)
+    private void UpdateWidth(double points)
     {
         if (aTableCellProperties.TopBorderLineProperties is null)
         {
@@ -56,7 +56,7 @@ internal class TopBorder(A.TableCellProperties aTableCellProperties) : IBorder
         aTableCellProperties.TopBorderLineProperties.Width = new Int32Value((int)emus);
     }
 
-    private decimal GetWidth()
+    private double GetWidth()
     {
         if (aTableCellProperties.TopBorderLineProperties is null)
         {

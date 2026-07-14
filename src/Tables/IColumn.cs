@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using ShapeCrawler.Units;
 using A = DocumentFormat.OpenXml.Drawing;
@@ -15,7 +15,7 @@ public interface IColumn
     /// <summary>
     ///     Gets or sets width in pixels.
     /// </summary>
-    decimal Width { get; set; }
+    double Width { get; set; }
 
     /// <summary>
     ///     Creates a duplicate of the current column at the end of the table.
@@ -25,7 +25,7 @@ public interface IColumn
 
 internal sealed class Column(A.GridColumn aGridColumn, int index) : IColumn
 {
-    public decimal Width
+    public double Width
     {
         get => new Emus(this.AGridColumn.Width!.Value).AsPoints();
         set => this.AGridColumn.Width!.Value = new Points(value).AsEmus();

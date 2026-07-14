@@ -1,6 +1,6 @@
-﻿namespace ShapeCrawler.Units;
+namespace ShapeCrawler.Units;
 
-internal readonly ref struct Pixels(decimal pixels)
+internal readonly ref struct Pixels(double pixels)
 {
     private const int HorizontalResolutionDpi = 96;
     private const int VerticalResolutionDpi = 96;

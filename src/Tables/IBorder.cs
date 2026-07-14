@@ -1,4 +1,4 @@
-﻿#pragma warning disable IDE0130
+#pragma warning disable IDE0130
 namespace ShapeCrawler;
 #pragma warning disable IDE0130
 
@@ -10,7 +10,7 @@ public interface IBorder
     /// <summary>
     ///     Gets or sets border width in points.
     /// </summary>
-    decimal Width { get; set; }
+    double Width { get; set; }
 
     /// <summary>
     ///     Gets or sets the border color.

@@ -116,14 +116,14 @@ public sealed class Presentation : IPresentation
     public ISlideCollection Slides { get; }
 
     /// <inheritdoc />
-    public decimal SlideHeight
+    public double SlideHeight
     {
         get => this.slideSize.Height;
         set => this.slideSize.Height = value;
     }
 
     /// <inheritdoc />
-    public decimal SlideWidth
+    public double SlideWidth
     {
         get => this.slideSize.Width;
         set => this.slideSize.Width = value;

@@ -5,12 +5,12 @@ namespace ShapeCrawler.Presentations;
 /// </summary>
 public sealed class DraftStroke
 {
-    internal decimal? DraftWidthPoints { get; private set; }
+    internal double? DraftWidthPoints { get; private set; }
 
     /// <summary>
     ///     Sets stroke width in points.
     /// </summary>
-    public DraftStroke Width(decimal points)
+    public DraftStroke Width(double points)
     {
         this.DraftWidthPoints = points;
         return this;

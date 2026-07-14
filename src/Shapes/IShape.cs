@@ -17,12 +17,12 @@ public interface IShape : IPosition, IShapeGeometry
     /// <summary>
     ///     Gets or sets the width of the shape in points.
     /// </summary>
-    decimal Width { get; set; }
+    double Width { get; set; }
 
     /// <summary>
     ///     Gets or sets the height of the shape in points.
     /// </summary>
-    decimal Height { get; set; }
+    double Height { get; set; }
 
     /// <summary>
     ///     Gets identifier of the shape.
@@ -144,6 +144,8 @@ public interface IShape : IPosition, IShapeGeometry
     /// </summary>
     public string SdkXPath { get; }
 
+    OpenXmlElement OpenXmlElement { get; }
+
     /// <summary>
     ///     Gets a copy of the underlying Open XML element.
     /// </summary>
@@ -203,7 +205,7 @@ public interface IShape : IPosition, IShapeGeometry
     /// <summary>
     ///     Sets the font size.
     /// </summary>
-    void SetFontSize(decimal fontSize);
+    void SetFontSize(double fontSize);
 
     /// <summary>
     ///     Sets the font color.

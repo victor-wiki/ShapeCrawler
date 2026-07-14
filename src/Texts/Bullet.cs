@@ -166,7 +166,7 @@ public sealed class Bullet
     internal void ApplyDefaultSpacing()
     {
         // PowerPoint uses a hanging indent where bullet is at 0 and text starts at 22.5pt.
-        var leftMarginEmu = (int)new Points(22.5m).AsEmus();
+        var leftMarginEmu = (int)new Points(22.5d).AsEmus();
         this.aParagraphProperties.LeftMargin = new Int32Value(leftMarginEmu);
         this.aParagraphProperties.Indent = new Int32Value(-leftMarginEmu);
     }

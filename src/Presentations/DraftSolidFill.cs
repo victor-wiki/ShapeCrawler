@@ -7,7 +7,7 @@ public sealed class DraftSolidFill
 {
     internal string? HexColor { get; private set; }
 
-    internal decimal? TransparencyPercent { get; private set; }
+    internal double? TransparencyPercent { get; private set; }
 
     /// <summary>
     ///     Sets fill color.
@@ -22,7 +22,7 @@ public sealed class DraftSolidFill
     /// <summary>
     ///     Sets fill transparency in percents. Range is 0 (opaque) to 100 (fully transparent).
     /// </summary>
-    public DraftSolidFill Transparency(decimal transparencyPercent)
+    public DraftSolidFill Transparency(double transparencyPercent)
     {
         this.TransparencyPercent = transparencyPercent;
         return this;

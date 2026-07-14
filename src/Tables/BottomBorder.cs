@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml;
 using ShapeCrawler.Units;
 using A = DocumentFormat.OpenXml.Drawing;
 
@@ -6,7 +6,7 @@ namespace ShapeCrawler.Tables;
 
 internal class BottomBorder(A.TableCellProperties aTableCellProperties) : IBorder
 {
-    public decimal Width
+    public double Width
     {
         get
         {
@@ -47,7 +47,7 @@ internal class BottomBorder(A.TableCellProperties aTableCellProperties) : IBorde
         aSolidFill.RgbColorModelHex.Val = new HexBinaryValue(color);
     }
 
-    private void UpdateWidth(decimal points)
+    private void UpdateWidth(double points)
     {
         if (aTableCellProperties.BottomBorderLineProperties is null)
         {

@@ -36,7 +36,7 @@ public interface IPicture
     /// <summary>
     ///     Gets or sets transparency in percentages. 0 (default) is fully opaque, 100 is fully transparent.
     /// </summary>
-    decimal Transparency { get; set; }
+    double Transparency { get; set; }
 
     /// <summary>
     ///     Sends the shape backward in the z-order.
@@ -83,14 +83,14 @@ public sealed class Picture(P.Picture pPicture, A.Blip aBlip) : IPicture
         }
     }
 
-    public decimal Transparency
+    public double Transparency
     {
         get
         {
             var aAlphaModFix = aBlip.GetFirstChild<A.AlphaModulationFixed>();
-            var amount = aAlphaModFix?.Amount?.Value ?? 100_000m;
+            var amount = aAlphaModFix?.Amount?.Value ?? 100_000d;
 
-            return 100m - (amount / 1000m); // value is stored in Open XML as thousandths of a percent
+            return 100d - (amount / 1000d); // value is stored in Open XML as thousandths of a percent
         }
 
         set
@@ -99,7 +99,7 @@ public sealed class Picture(P.Picture pPicture, A.Blip aBlip) : IPicture
                                ?? aBlip.InsertAt<A.AlphaModulationFixed>(new(), 0)
                                ?? throw new SCException("Failed to add AlphaModFix");
 
-            aAlphaModFix.Amount = Convert.ToInt32((100m - value) * 1000m);
+            aAlphaModFix.Amount = Convert.ToInt32((100d - value) * 1000d);
         }
     }
 
@@ -187,16 +187,16 @@ public sealed class Picture(P.Picture pPicture, A.Blip aBlip) : IPicture
     /// </summary>
     /// <param name="int32">Per cent mille value.</param>
     /// <returns>Percent value.</returns>
-    private static decimal FromThousandths(Int32Value? int32) =>
-        int32 is not null ? int32 / 1000m : 0;
+    private static double FromThousandths(Int32Value? int32) =>
+        int32 is not null ? int32 / 1000d : 0;
 
     /// <summary>
     ///     Convert a value from 'percent mille' (thousandths of a percent).
     /// </summary>
     /// <param name="input">Percent value.</param>
     /// <returns>Per cent mille value.</returns>
-    private static Int32Value? ToThousandths(decimal input) =>
-        input == 0 ? null : Convert.ToInt32(input * 1000m);
+    private static Int32Value? ToThousandths(double input) =>
+        input == 0 ? null : Convert.ToInt32(input * 1000d);
 
     private string? GetSvgContent()
     {

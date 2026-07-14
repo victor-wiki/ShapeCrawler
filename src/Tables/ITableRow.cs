@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using ShapeCrawler.Shapes;
 using ShapeCrawler.Tables;
@@ -23,7 +23,7 @@ public interface ITableRow
     /// <summary>
     ///     Gets or sets height in points.
     /// </summary>
-    decimal Height { get; set; }
+    double Height { get; set; }
 
     /// <summary>
     ///     Creates a duplicate of the current row and adds this at the table end.
@@ -77,7 +77,7 @@ internal sealed class TableRow(A.TableRow aTableRow, int index) : ITableRow
         }
     }
 
-    public decimal Height
+    public double Height
     {
         get => new Emus(this.ATableRow.Height!.Value).AsPoints();
         set
@@ -121,7 +121,7 @@ internal sealed class TableRow(A.TableRow aTableRow, int index) : ITableRow
         this.ATableRow.Height!.Value = newEmu;
     }
 
-    internal void SetHeight(decimal newPoints)
+    internal void SetHeight(double newPoints)
     {
         var currentPoints = new Emus(this.ATableRow.Height!.Value).AsPoints();
         if (currentPoints == newPoints)

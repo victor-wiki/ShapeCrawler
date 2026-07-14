@@ -1,4 +1,4 @@
-﻿using ShapeCrawler.Texts;
+using ShapeCrawler.Texts;
 using A = DocumentFormat.OpenXml.Drawing;
 
 #pragma warning disable IDE0130
@@ -33,7 +33,7 @@ internal sealed class SlideNumberFont : ISlideNumberFont
         set => this.UpdateColor(value);
     }
 
-    public decimal Size
+    public double Size
     {
         get => this.masterSlideNumberSize.Size;
         set => this.masterSlideNumberSize.Size = value;

@@ -12,7 +12,7 @@ namespace ShapeCrawler.Drawing;
 /// <param name="Right">Percentage of image along right edge of source picture which will not be displayed.</param>
 /// <param name="Top">Percentage of image from top edge of source picture which will not be displayed.</param>
 /// <param name="Bottom">Percentage of image from bottom edge of source picture which will not be displayed.</param>
-public readonly record struct CroppingFrame(decimal Left, decimal Right, decimal Top, decimal Bottom)
+public readonly record struct CroppingFrame(double Left, double Right, double Top, double Bottom)
 {
     /// <summary>
     ///     Parse a string value into a cropping frame.
@@ -33,9 +33,9 @@ public readonly record struct CroppingFrame(decimal Left, decimal Right, decimal
         }
 
         return new CroppingFrame(
-            decimal.Parse(split[0].Trim()),
-            decimal.Parse(split[1].Trim()),
-            decimal.Parse(split[2].Trim()),
-            decimal.Parse(split[3].Trim()));
+            double.Parse(split[0].Trim()),
+            double.Parse(split[1].Trim()),
+            double.Parse(split[2].Trim()),
+            double.Parse(split[3].Trim()));
     }
 }

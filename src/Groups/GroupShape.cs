@@ -44,10 +44,10 @@ public sealed class GroupShape : DrawingShape
 
         var groupShapeProperties = new P.GroupShapeProperties();
 
-        decimal minX = decimal.MaxValue;
-        decimal minY = decimal.MaxValue;
-        decimal maxX = decimal.MinValue;
-        decimal maxY = decimal.MinValue;
+        double minX = double.MaxValue;
+        double minY = double.MaxValue;
+        double maxX = double.MinValue;
+        double maxY = double.MinValue;
 
         foreach (var groupingShape in groupingShapes)
         {
@@ -162,7 +162,7 @@ public sealed class GroupShape : DrawingShape
         }
     }
 
-    private (decimal X, decimal Y, decimal Width, decimal Height) AbsoluteBounds()
+    private (double X, double Y, double Width, double Height) AbsoluteBounds()
     {
         var pGroupShapes = this.pGroupShape.Ancestors<P.GroupShape>().ToArray();
         if (pGroupShapes.Length == 0)
@@ -170,10 +170,10 @@ public sealed class GroupShape : DrawingShape
             return (this.X, this.Y, this.Width, this.Height);
         }
 
-        decimal absoluteX = this.X;
-        decimal absoluteY = this.Y;
-        decimal scaleFactorX = 1.0m;
-        decimal scaleFactorY = 1.0m;
+        double absoluteX = this.X;
+        double absoluteY = this.Y;
+        double scaleFactorX = 1.0d;
+        double scaleFactorY = 1.0d;
 
         foreach (var childPGroupShape in pGroupShapes)
         {
@@ -183,16 +183,16 @@ public sealed class GroupShape : DrawingShape
             var offset = transformGroup.Offset!;
             var extents = transformGroup.Extents!;
 
-            decimal currentScaleFactorX = 1.0m;
+            double currentScaleFactorX = 1.0d;
             if (childExtents.Cx!.Value != 0)
             {
-                currentScaleFactorX = (decimal)extents.Cx!.Value / childExtents.Cx!.Value;
+                currentScaleFactorX = (double)extents.Cx!.Value / childExtents.Cx!.Value;
             }
 
-            decimal currentScaleFactorY = 1.0m;
+            double currentScaleFactorY = 1.0d;
             if (childExtents.Cy!.Value != 0)
             {
-                currentScaleFactorY = (decimal)extents.Cy!.Value / childExtents.Cy!.Value;
+                currentScaleFactorY = (double)extents.Cy!.Value / childExtents.Cy!.Value;
             }
 
             var childOffsetX = new Emus(childOffset.X!.Value).AsPoints();

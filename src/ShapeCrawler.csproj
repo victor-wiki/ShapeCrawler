@@ -10,10 +10,8 @@ This library provides a simplified object model on top of the Open XML SDK for m
     <PackageTags>ShapeCrawler Presentation PPTX  PowerPoint Slides OpenXml OOXML</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>latest</LangVersion>
-    <Version>1.0.4</Version>
-    <PackageReleaseNotes>1. make "OpenXmlElement" property as public;
-2. make "MediaShape" as public;
-3. add "OpenXmlElement" to ShapeFill.</PackageReleaseNotes>
+    <Version>1.0.5</Version>
+    <PackageReleaseNotes>Change data type "decimal" to "double".</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/victor-wiki/ShapeCrawler</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/victor-wiki/ShapeCrawler</RepositoryUrl>
@@ -31,8 +29,8 @@ This library provides a simplified object model on top of the Open XML SDK for m
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <NoWarn>OOXML0001</NoWarn>
     <PackageId>victor-wiki.$(AssemblyName)</PackageId>
-    <AssemblyVersion>1.0.4</AssemblyVersion>
-    <FileVersion>1.0.4</FileVersion>
+    <AssemblyVersion>1.0.5</AssemblyVersion>
+    <FileVersion>1.0.5</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

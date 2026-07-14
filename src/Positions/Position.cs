@@ -8,7 +8,7 @@ namespace ShapeCrawler.Positions;
 
 public sealed class Position(OpenXmlElement pShapeTreeElement)
 {
-    internal decimal X
+    internal double X
     {
         get
         {
@@ -23,7 +23,7 @@ public sealed class Position(OpenXmlElement pShapeTreeElement)
         }
     }
 
-    internal decimal Y
+    internal double Y
     {
         get
         {

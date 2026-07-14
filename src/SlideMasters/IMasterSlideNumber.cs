@@ -1,4 +1,4 @@
-﻿using ShapeCrawler.Positions;
+using ShapeCrawler.Positions;
 using A = DocumentFormat.OpenXml.Drawing;
 using P = DocumentFormat.OpenXml.Presentation;
 
@@ -36,13 +36,13 @@ internal sealed class MasterSlideNumber : IMasterSlideNumber
 
     public ISlideNumberFont Font { get; }
 
-    public decimal X
+    public double X
     {
         get => this.position.X;
         set => this.position.X = value;
     }
 
-    public decimal Y
+    public double Y
     {
         get => this.position.Y;
         set => this.position.Y = value;

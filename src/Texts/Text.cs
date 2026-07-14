@@ -8,9 +8,9 @@ internal readonly ref struct Text(string content, ITextPortionFont font)
 {
     private const string DefaultFontFamily = "Calibri";
 
-    internal decimal FontSize => font.Size;
+    internal double FontSize => font.Size;
 
-    internal decimal LineHeight
+    internal double LineHeight
     {
         get
         {
@@ -35,11 +35,11 @@ internal readonly ref struct Text(string content, ITextPortionFont font)
             skFont.Size = (float)font.Size;
             skFont.Typeface = SKTypeface.FromFamilyName(fontFamily, style);
 
-            return (decimal)skFont.Spacing;
+            return (double)skFont.Spacing;
         }
     }
 
-    internal decimal Width
+    internal double Width
     {
         get
         {
@@ -65,11 +65,11 @@ internal readonly ref struct Text(string content, ITextPortionFont font)
             skFont.Size = (float)font.Size;
             skFont.Typeface = SKTypeface.FromFamilyName(fontFamily, style);
 
-            return (decimal)skFont.MeasureText(content);
+            return (double)skFont.MeasureText(content);
         }
     }
 
-    internal void Fit(decimal width, decimal height)
+    internal void Fit(double width, double height)
     {
         using var surface = SKSurface.Create(new SKImageInfo((int)width, (int)height));
         var canvas = surface.Canvas;
@@ -118,7 +118,7 @@ internal readonly ref struct Text(string content, ITextPortionFont font)
             wordX = rect.Left;
 
             // Check if we've reached vertical limit
-            if ((decimal)wordY > wordMaxY)
+            if ((double)wordY > wordMaxY)
             {
                 // Minimum font size reached, can't shrink further
                 if (skFont.Size <= 5)
@@ -143,13 +143,13 @@ internal readonly ref struct Text(string content, ITextPortionFont font)
 
         // Compensate for the scaling that will be applied later by PortionFontSize.ApplyNormAutofitScaling()
         var scaleFactor = GetNormAutofitScaleFactor(font);
-        var compensatedSize = scaleFactor > 0 ? (decimal)skFont.Size / scaleFactor : (decimal)skFont.Size;
+        var compensatedSize = scaleFactor > 0 ? (double)skFont.Size / scaleFactor : (double)skFont.Size;
 
         font.Size = compensatedSize;
     }
 
     // Gets the scaling factor that will be applied by PortionFontSize.ApplyNormAutofitScaling()
-    private static decimal GetNormAutofitScaleFactor(ITextPortionFont font)
+    private static double GetNormAutofitScaleFactor(ITextPortionFont font)
     {
         // Access the underlying PortionFontSize to get the scaling factor
         if (font is TextPortionFont textPortionFont)
@@ -158,7 +158,7 @@ internal readonly ref struct Text(string content, ITextPortionFont font)
             var currentSize = textPortionFont.Size;
 
             // Set a test value and see how it gets scaled
-            const decimal testSize = 100m;
+            const double testSize = 100d;
             textPortionFont.Size = testSize;
             var scaledTestSize = textPortionFont.Size;
 
@@ -169,7 +169,7 @@ internal readonly ref struct Text(string content, ITextPortionFont font)
             return scaledTestSize / testSize;
         }
 
-        return 1m; // No scaling if we can't determine it
+        return 1d; // No scaling if we can't determine it
     }
 
     // Resets the text layout coordinates when font size changes

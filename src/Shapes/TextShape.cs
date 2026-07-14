@@ -36,7 +36,7 @@ public class TextShape(P.Shape pShape, DrawingTextBox textBox)
         }
     }
 
-    public override void SetFontSize(decimal fontSize)
+    public override void SetFontSize(double fontSize)
     {
         foreach (var paragraph in this.TextBox.Paragraphs)
         {

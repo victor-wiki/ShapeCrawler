@@ -102,19 +102,19 @@ public abstract class TextBox : ITextBox
         }
     }
 
-    public decimal LeftMargin
+    public double LeftMargin
     {
         get => this.margins.Left;
         set => this.margins.Left = value;
     }
 
-    public decimal RightMargin
+    public double RightMargin
     {
         get => this.margins.Right;
         set => this.margins.Right = value;
     }
 
-    public decimal TopMargin
+    public double TopMargin
     {
         get => this.margins.Top;
         set
@@ -123,7 +123,7 @@ public abstract class TextBox : ITextBox
         }
     }
 
-    public decimal BottomMargin
+    public double BottomMargin
     {
         get => this.margins.Bottom;
         set => this.margins.Bottom = value;

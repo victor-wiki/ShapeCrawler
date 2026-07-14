@@ -9,7 +9,7 @@ namespace ShapeCrawler.Slides;
 
 public sealed class SlideShapeOutline(OpenXmlCompositeElement openXmlCompositeElement) : IShapeOutline
 {
-    public decimal Weight
+    public double Weight
     {
         get => this.ParseWeight();
         set => this.UpdateWeight(value);
@@ -26,7 +26,7 @@ public sealed class SlideShapeOutline(OpenXmlCompositeElement openXmlCompositeEl
     /// <inheritdoc/>
     public void SetNoOutline() => this.UpdateFill(new A.NoFill());
 
-    private void UpdateWeight(decimal points)
+    private void UpdateWeight(double points)
     {
         var aOutline = openXmlCompositeElement.GetFirstChild<A.Outline>();
         var aNoFill = aOutline?.GetFirstChild<A.NoFill>();
@@ -62,7 +62,7 @@ public sealed class SlideShapeOutline(OpenXmlCompositeElement openXmlCompositeEl
         aOutline.AppendChild(child);
     }
 
-    private decimal ParseWeight()
+    private double ParseWeight()
     {
         var width = openXmlCompositeElement.GetFirstChild<A.Outline>()?.Width;
         if (width is null)

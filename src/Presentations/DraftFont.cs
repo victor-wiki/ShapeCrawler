@@ -8,7 +8,7 @@ public sealed class DraftFont
     /// <summary>
     ///    Gets font size.
     /// </summary>
-    internal decimal? SizeValue { get; private set; }
+    internal double? SizeValue { get; private set; }
 
     /// <summary>
     ///    Gets a value indicating whether font is bold.

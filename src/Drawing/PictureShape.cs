@@ -12,7 +12,7 @@ namespace ShapeCrawler.Drawing;
 public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(new Position(pPicture),
     new ShapeSize(pPicture), new ShapeId(pPicture), pPicture)
 {
-    public override decimal X
+    public override double X
     {
         get => this.AbsoluteX();
         set
@@ -22,7 +22,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         }
     }
 
-    public override decimal Y
+    public override double Y
     {
         get => this.AbsoluteY();
         set
@@ -32,7 +32,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         }
     }
 
-    public override decimal Width
+    public override double Width
     {
         get => this.AbsoluteWidth();
         set
@@ -42,7 +42,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         }
     }
 
-    public override decimal Height
+    public override double Height
     {
         get => this.AbsoluteHeight();
         set => base.Height = this.LocalHeight(value);
@@ -72,10 +72,10 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         ApplyRotation(canvas);
 
         var crop = picture.Crop;
-        var srcLeft = (float)(bitmap.Width * (double)(crop.Left / 100m));
-        var srcTop = (float)(bitmap.Height * (double)(crop.Top / 100m));
-        var srcRight = (float)(bitmap.Width * (1 - (double)(crop.Right / 100m)));
-        var srcBottom = (float)(bitmap.Height * (1 - (double)(crop.Bottom / 100m)));
+        var srcLeft = (float)(bitmap.Width * (double)(crop.Left / 100d));
+        var srcTop = (float)(bitmap.Height * (double)(crop.Top / 100d));
+        var srcRight = (float)(bitmap.Width * (1 - (double)(crop.Right / 100d)));
+        var srcBottom = (float)(bitmap.Height * (1 - (double)(crop.Bottom / 100d)));
         var srcRect = new SKRect(srcLeft, srcTop, srcRight, srcBottom);
 
         var destRect = new SKRect((float)x, (float)y, (float)(x + width), (float)(y + height));
@@ -86,7 +86,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         var transparency = picture.Transparency;
         if (transparency > 0)
         {
-            var alpha = (byte)(255 * (1 - (double)(transparency / 100m)));
+            var alpha = (byte)(255 * (1 - (double)(transparency / 100d)));
             paint.Color = paint.Color.WithAlpha(alpha);
         }
 
@@ -106,13 +106,13 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
             return parentDiff;
         }
 
-        var scaleFactor = (decimal)extents / childExtents;
+        var scaleFactor = (double)extents / childExtents;
         if (scaleFactor == 0)
         {
             return parentDiff;
         }
 
-        return (long)decimal.Round(parentDiff / scaleFactor, 0, MidpointRounding.AwayFromZero);
+        return (long)double.Round(parentDiff / scaleFactor, 0, MidpointRounding.AwayFromZero);
     }
 
     private void ApplyRotation(SKCanvas canvas)
@@ -132,7 +132,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         );
     }
 
-    private decimal AbsoluteX()
+    private double AbsoluteX()
     {
         var pGroupShapes = pPicture.Ancestors<P.GroupShape>().ToArray();
         if (pGroupShapes.Length == 0)
@@ -140,7 +140,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
             return base.X;
         }
 
-        decimal absoluteX = base.X;
+        double absoluteX = base.X;
 
         foreach (var pGroupShape in pGroupShapes)
         {
@@ -150,10 +150,10 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
             var offset = transformGroup.Offset!;
             var extents = transformGroup.Extents!;
 
-            decimal scaleFactor = 1.0m;
+            double scaleFactor = 1.0d;
             if (childExtents.Cx!.Value != 0)
             {
-                scaleFactor = (decimal)extents.Cx!.Value / childExtents.Cx!.Value;
+                scaleFactor = (double)extents.Cx!.Value / childExtents.Cx!.Value;
             }
 
             var childOffsetX = new Emus(childOffset.X!.Value).AsPoints();
@@ -163,7 +163,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         return absoluteX;
     }
 
-    private decimal AbsoluteY()
+    private double AbsoluteY()
     {
         var pGroupShapes = pPicture.Ancestors<P.GroupShape>().ToArray();
         if (pGroupShapes.Length == 0)
@@ -171,7 +171,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
             return base.Y;
         }
 
-        decimal absoluteY = base.Y;
+        double absoluteY = base.Y;
 
         foreach (var pGroupShape in pGroupShapes)
         {
@@ -181,10 +181,10 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
             var offset = transformGroup.Offset!;
             var extents = transformGroup.Extents!;
 
-            decimal scaleFactor = 1.0m;
+            double scaleFactor = 1.0d;
             if (childExtents.Cy!.Value != 0)
             {
-                scaleFactor = (decimal)extents.Cy!.Value / childExtents.Cy!.Value;
+                scaleFactor = (double)extents.Cy!.Value / childExtents.Cy!.Value;
             }
 
             var childOffsetY = new Emus(childOffset.Y!.Value).AsPoints();
@@ -194,7 +194,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         return absoluteY;
     }
 
-    private decimal LocalX(decimal absoluteX)
+    private double LocalX(double absoluteX)
     {
         var pGroupShapes = pPicture.Ancestors<P.GroupShape>().ToArray();
         if (pGroupShapes.Length == 0)
@@ -212,15 +212,15 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
             var offset = transformGroup.Offset!;
             var extents = transformGroup.Extents!;
 
-            decimal scaleFactor = 1.0m;
+            double scaleFactor = 1.0d;
             if (childExtents.Cx!.Value != 0)
             {
-                scaleFactor = (decimal)extents.Cx!.Value / childExtents.Cx!.Value;
+                scaleFactor = (double)extents.Cx!.Value / childExtents.Cx!.Value;
             }
 
             if (scaleFactor == 0)
             {
-                scaleFactor = 1.0m;
+                scaleFactor = 1.0d;
             }
 
             var childOffsetX = new Emus(childOffset.X!.Value).AsPoints();
@@ -231,7 +231,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         return localX;
     }
 
-    private decimal LocalY(decimal absoluteY)
+    private double LocalY(double absoluteY)
     {
         var pGroupShapes = pPicture.Ancestors<P.GroupShape>().ToArray();
         if (pGroupShapes.Length == 0)
@@ -249,15 +249,15 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
             var offset = transformGroup.Offset!;
             var extents = transformGroup.Extents!;
 
-            decimal scaleFactor = 1.0m;
+            double scaleFactor = 1.0;
             if (childExtents.Cy!.Value != 0)
             {
-                scaleFactor = (decimal)extents.Cy!.Value / childExtents.Cy!.Value;
+                scaleFactor = (double)extents.Cy!.Value / childExtents.Cy!.Value;
             }
 
             if (scaleFactor == 0)
             {
-                scaleFactor = 1.0m;
+                scaleFactor = 1.0d;
             }
 
             var childOffsetY = new Emus(childOffset.Y!.Value).AsPoints();
@@ -268,10 +268,10 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         return localY;
     }
 
-    private decimal LocalWidth(decimal absoluteWidth)
+    private double LocalWidth(double absoluteWidth)
     {
         var scaleFactor = ShapePositionHelper.CalculateAbsoluteDimension(
-            1.0m,
+            1.0d,
             pPicture,
             groupShape => groupShape.GroupShapeProperties!.TransformGroup!.ChildExtents!.Cx!.Value,
             groupShape => groupShape.GroupShapeProperties!.TransformGroup!.Extents!.Cx!.Value
@@ -285,10 +285,10 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         return absoluteWidth / scaleFactor;
     }
 
-    private decimal LocalHeight(decimal absoluteHeight)
+    private double LocalHeight(double absoluteHeight)
     {
         var scaleFactor = ShapePositionHelper.CalculateAbsoluteDimension(
-            1.0m,
+            1.0d,
             pPicture,
             groupShape => groupShape.GroupShapeProperties!.TransformGroup!.ChildExtents!.Cy!.Value,
             groupShape => groupShape.GroupShapeProperties!.TransformGroup!.Extents!.Cy!.Value
@@ -302,7 +302,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         return absoluteHeight / scaleFactor;
     }
 
-    private decimal AbsoluteWidth()
+    private double AbsoluteWidth()
     {
         return ShapePositionHelper.CalculateAbsoluteDimension(
             base.Width,
@@ -312,7 +312,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
         );
     }
 
-    private decimal AbsoluteHeight()
+    private double AbsoluteHeight()
     {
         return ShapePositionHelper.CalculateAbsoluteDimension(
             base.Height,
@@ -438,8 +438,8 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
     // Helper for absolute position/size calculations
     private static class ShapePositionHelper
     {
-        public static decimal CalculateAbsoluteDimension(
-            decimal baseValue,
+        public static double CalculateAbsoluteDimension(
+            double baseValue,
             OpenXmlElement shapeElement,
             Func<P.GroupShape, long> getChildExtents,
             Func<P.GroupShape, long> getExtents)
@@ -450,7 +450,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
                 return baseValue;
             }
 
-            decimal cumulativeScaleFactor = 1.0m;
+            double cumulativeScaleFactor = 1.0d;
             foreach (var pGroupShape in pGroupShapes)
             {
                 var childExtents = getChildExtents(pGroupShape);
@@ -460,7 +460,7 @@ public class PictureShape(Picture picture, P.Picture pPicture) : DrawingShape(ne
                     continue;
                 }
 
-                var scaleFactor = (decimal)extents / childExtents;
+                var scaleFactor = (double)extents / childExtents;
                 cumulativeScaleFactor *= scaleFactor;
             }
 

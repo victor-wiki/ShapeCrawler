@@ -7,7 +7,7 @@ namespace ShapeCrawler.Shapes;
 
 public sealed class ShapeSize(OpenXmlElement pShapeTreeElement)
 {
-    internal decimal Width
+    internal double Width
     {
         get => new Emus(this.GetAExtents()?.Cx!??0).AsPoints();
         set
@@ -22,7 +22,7 @@ public sealed class ShapeSize(OpenXmlElement pShapeTreeElement)
         }
     }
 
-    internal decimal Height
+    internal double Height
     {
         get => new Emus(this.GetAExtents()?.Cy!??0).AsPoints();
         set

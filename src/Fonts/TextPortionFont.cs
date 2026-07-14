@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using DocumentFormat.OpenXml;
 using ShapeCrawler.Colors;
@@ -15,7 +15,7 @@ internal sealed class TextPortionFont(
     ThemeFontScheme themeFontScheme,
     A.Text aText) : ITextPortionFont
 {
-    public decimal Size
+    public double Size
     {
         get => fontSize.Size;
         set => fontSize.Size = value;

@@ -1,4 +1,4 @@
-﻿namespace ShapeCrawler.Fonts;
+namespace ShapeCrawler.Fonts;
 
 /// <summary>
 ///     Represents a font size.
@@ -8,5 +8,5 @@ internal interface IFontSize
     /// <summary>
     ///     Gets or sets the font size.
     /// </summary>
-    decimal Size { get; set; }
+    double Size { get; set; }
 }

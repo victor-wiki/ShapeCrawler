@@ -1,11 +1,11 @@
-﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml;
 using ShapeCrawler.Units;
 
 namespace ShapeCrawler.Texts;
 
 internal readonly ref struct LeftRightMargin(Int32Value? emus)
 {
-    private const decimal DefaultLeftAndRightMarginPoints = 7.09m; // ~0.25 cm
+    private const double DefaultLeftAndRightMarginPoints = 7.09d; // ~0.25 cm
 
-    public decimal Value => emus is null ? DefaultLeftAndRightMarginPoints : new Emus(emus).AsPoints();
+    public double Value => emus is null ? DefaultLeftAndRightMarginPoints : new Emus(emus).AsPoints();
 }

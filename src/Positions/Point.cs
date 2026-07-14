@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 #pragma warning disable IDE0130
 namespace ShapeCrawler;
@@ -9,6 +9,6 @@ namespace ShapeCrawler;
 /// </summary>
 public sealed record Point(// TODO: should be struct?
     [property: Description("Gets X-coordinate in points")]
-    decimal X,
+    double X,
     [property: Description("Gets Y-coordinate in points")]
-    decimal Y);
+    double Y);

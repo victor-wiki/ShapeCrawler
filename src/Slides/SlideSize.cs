@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml;
 using ShapeCrawler.Units;
 using P = DocumentFormat.OpenXml.Presentation;
 
@@ -6,7 +6,7 @@ namespace ShapeCrawler.Slides;
 
 internal sealed class SlideSize(P.SlideSize pSlideSize)
 {
-    internal decimal Width
+    internal double Width
     {
         get => new Emus(pSlideSize.Cx!.Value).AsPoints();
         set
@@ -16,7 +16,7 @@ internal sealed class SlideSize(P.SlideSize pSlideSize)
         }
     }
 
-    internal decimal Height
+    internal double Height
     {
         get => new Emus(pSlideSize.Cy!.Value).AsPoints();
         set

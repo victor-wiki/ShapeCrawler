@@ -1,4 +1,4 @@
-﻿using ShapeCrawler.Units;
+using ShapeCrawler.Units;
 using A = DocumentFormat.OpenXml.Drawing;
 
 #pragma warning disable IDE0130
@@ -18,38 +18,38 @@ public interface ISpacing
     /// <summary>
     ///     Gets the number of spaces in <c>points</c> appears between lines of text. Returns <see langword="null"/> if the spaces are not specified in points. 
     /// </summary>
-    decimal? LineSpacing { get; }
+    double? LineSpacing { get; }
 
     /// <summary>
     ///    Gets or sets the number of spaces in points before the paragraph.
     /// </summary>
-    decimal BeforeSpacing { get; set; }
+    double BeforeSpacing { get; set; }
 
     /// <summary>
     ///    Gets or sets the number of spaces in points after the paragraph.
     /// </summary>
-    decimal AfterSpacing { get; set; }
+    double AfterSpacing { get; set; }
 }
 
 internal sealed class Spacing(A.Paragraph aParagraph) : ISpacing
 {
     public double? LineSpacingLines => this.GetLineSpacingLines();
 
-    public decimal? LineSpacing
+    public double? LineSpacing
     {
         get
         {
             var aLnSpc = aParagraph.ParagraphProperties!.LineSpacing?.SpacingPoints;
             if (aLnSpc is not null)
             {
-                return aLnSpc.Val! / 100m;
+                return aLnSpc.Val! / 100d;
             }
 
             return null;
         }
     }
 
-    public decimal BeforeSpacing
+    public double BeforeSpacing
     {
         get
         {
@@ -59,12 +59,12 @@ internal sealed class Spacing(A.Paragraph aParagraph) : ISpacing
                 return 0;
             }
 
-            return hundredsOfPoints / 100m;
+            return hundredsOfPoints / 100d;
         }
         set => this.SetBeforeSpacingPoints(value);
     }
 
-    public decimal AfterSpacing
+    public double AfterSpacing
     {
         get
         {
@@ -74,7 +74,7 @@ internal sealed class Spacing(A.Paragraph aParagraph) : ISpacing
                 return 0;
             }
 
-            return hundredsOfPoints / 100m;
+            return hundredsOfPoints / 100d;
         }
 
         set
@@ -97,7 +97,7 @@ internal sealed class Spacing(A.Paragraph aParagraph) : ISpacing
         }
     }
 
-    private void SetBeforeSpacingPoints(decimal points)
+    private void SetBeforeSpacingPoints(double points)
     {
         var aSpcBef = aParagraph.ParagraphProperties;
         aSpcBef ??= new A.ParagraphProperties();

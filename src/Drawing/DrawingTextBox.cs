@@ -15,7 +15,7 @@ public sealed class DrawingTextBox : TextBox
     {
     }
 
-    internal void Render(SKCanvas canvas, decimal parentShapeX, decimal parentShapeY, decimal parentShapeWidth, decimal parentShapeHeight)
+    internal void Render(SKCanvas canvas, double parentShapeX, double parentShapeY, double parentShapeWidth, double parentShapeHeight)
     {
         if (string.IsNullOrWhiteSpace(Text))
         {
@@ -31,18 +31,18 @@ public sealed class DrawingTextBox : TextBox
         new TextLayout(this.Paragraphs, availableWidth, wrap).Render(canvas, originX, originY, availableHeight, VerticalAlignment);
     }
 
-    private static decimal ClampToZero(decimal value)
+    private static double ClampToZero(double value)
     {
         return value < 0 ? 0 : value;
     }
 
-    private float GetAvailableWidth(decimal parentShapeWidth)
+    private float GetAvailableWidth(double parentShapeWidth)
     {
         var width = ClampToZero(parentShapeWidth - this.LeftMargin - this.RightMargin);
         return (float)new Points(width).AsPixels();
     }
 
-    private float GetAvailableHeight(decimal parentShapeHeight)
+    private float GetAvailableHeight(double parentShapeHeight)
     {
         var height = ClampToZero(parentShapeHeight - this.TopMargin - this.BottomMargin);
         return (float)new Points(height).AsPixels();

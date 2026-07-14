@@ -659,7 +659,7 @@ public sealed class DraftSlide
         }
     }
 
-    private static void SetSolidFillTransparency(OpenXmlElement pShapeTreeElement, decimal transparencyPercent)
+    private static void SetSolidFillTransparency(OpenXmlElement pShapeTreeElement, double transparencyPercent)
     {
         if (transparencyPercent is < 0 or > 100)
         {

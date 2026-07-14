@@ -7,7 +7,7 @@ namespace ShapeCrawler.Texts;
 
 public sealed class TextBoxMargins(OpenXmlElement textBody)
 {
-    internal decimal Left
+    internal double Left
     {
         get
         {
@@ -22,7 +22,7 @@ public sealed class TextBoxMargins(OpenXmlElement textBody)
         }
     }
 
-    internal decimal Right
+    internal double Right
     {
         get => new LeftRightMargin(textBody.GetFirstChild<A.BodyProperties>()!.RightInset).Value;
         set
@@ -33,7 +33,7 @@ public sealed class TextBoxMargins(OpenXmlElement textBody)
         }
     }
 
-    internal decimal Top
+    internal double Top
     {
         get => new TopBottomMargin(textBody.GetFirstChild<A.BodyProperties>()!.TopInset).Value;
         set
@@ -44,7 +44,7 @@ public sealed class TextBoxMargins(OpenXmlElement textBody)
         }
     }
 
-    internal decimal Bottom
+    internal double Bottom
     {
         get => new TopBottomMargin(textBody.GetFirstChild<A.BodyProperties>()!.BottomInset).Value;
         set

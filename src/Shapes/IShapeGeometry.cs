@@ -20,7 +20,7 @@ public interface IShapeGeometry
     ///     Value 0 makes shape appear as a regular rectangle with no corners.
     ///     Value 100 is the maximum size of a corner: 1/2 length of shortest side.
     /// </remarks>
-    decimal CornerSize { get; set; }
+    double CornerSize { get; set; }
 
     /// <summary>
     ///     Gets or sets the geometry adjustments.
@@ -36,5 +36,5 @@ public interface IShapeGeometry
     ///     Setting adjustments is only allowed for rounded or snipped rectangles,
     ///     in which case it adjusts the percentage of roundedness or snipping (0-100).
     /// </remarks>
-    decimal[] Adjustments { get; set; }
+    double[] Adjustments { get; set; }
 }
